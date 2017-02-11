@@ -1,0 +1,38 @@
+#!/bin/bash
+#originals=(banned_props)
+originals=(cplx_string_to_df
+		   string_to_df
+		   cplx_split
+		   extract_last_path_element
+		   find_entity_params
+		   follow_path_extract_value
+		   get_biopax_dt_from_interactions_df
+		   make_aux_df_for_dTable
+		   )
+
+#set the shell reader such that
+#it distinguishes new files only by linebreaks
+#(IFS is that internal variable)
+IFS=$'\n'
+
+#file list
+files=(*.R)
+
+# loop through all names to replace
+for name in ${originals[@]}
+	do 
+	echo $name
+	#define new name (i.e. replacement)
+	newname="internal_"$name
+	#replace
+	for file in ${files[@]}
+		do
+		sed -i 's/'$name'/'$newname'/g' "$file"
+	done
+done
+
+#change filenames
+for name in ${originals[@]}
+	do 
+	mv "$name.R" "internal_$name.R"
+done
