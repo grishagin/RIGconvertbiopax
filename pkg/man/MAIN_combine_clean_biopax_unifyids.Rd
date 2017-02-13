@@ -4,14 +4,13 @@
 \alias{MAIN_combine_clean_biopax_unifyids}
 \title{MAIN -- Combine and Clean List of BioPAX Objects}
 \usage{
-MAIN_combine_clean_biopax_unifyids(new_biopax_list,
-  pw_df_path = "./_source_files/pathways_matched_to_sources_v016.xlsx",
+MAIN_combine_clean_biopax_unifyids(new_biopax_list, pw_df_path = "default",
   exclude_id_pattern = "inxight_pathways")
 }
 \arguments{
 \item{new_biopax_list}{List of BioPAX objects.}
 
-\item{pw_df_path}{Path to the source table with pathway, id, name, and source values}
+\item{pw_df_path}{Path to the source table with pathway, id, name, and source values.}
 
 \item{exclude_id_pattern}{Exclude pathways with such pattern in their IDs from ID unification.}
 }

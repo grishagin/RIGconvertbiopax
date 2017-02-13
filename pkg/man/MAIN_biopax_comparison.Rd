@@ -28,9 +28,9 @@ or \code{none} to not use this comparison at all.}
 
 \item{verbose}{Logical. Show all pertaining progress?}
 
-\item{pw_df_path}{}
+\item{pw_df_path}{Path to the source table with pathway, id, name, and source values.}
 
-\item{source_name}{BioPAX source name.}
+\item{source_name}{BioPAX public source name.}
 }
 \description{
 Compare pathways in two BioPAX objects.

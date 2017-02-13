@@ -32,11 +32,19 @@ MAIN_biopax_comparison<-
         #' @param new_biopax_tag First BioPAX Object tag.
         #' @param orig_biopax_tag BioPAX object.
         #' @param verbose Logical. Show all pertaining progress?
-        #' @param pw_df_path 
-        #' @param source_name BioPAX source name.
+        #' @param pw_df_path Path to the source table with pathway, id, name, and source values.
+        #' @param source_name BioPAX public source name.
         
         #' @author 
         #' Ivan Grishagin
+        
+        #establish initial key parameters, if not supplied by user
+        if(pw_df_path=="default"){
+            pw_df_path<-
+                system.file("extdata"
+                            ,"pathways_matched_to_sources_current_version.xlsx"
+                            ,package="RIGbiopax")
+        }
         
         st<-Sys.time()
         

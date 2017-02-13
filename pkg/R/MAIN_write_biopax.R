@@ -3,7 +3,7 @@ MAIN_write_biopax<-
   function(combined_biopax
            ,what=c("both","onebig","manysmall")
            ,onebigfilename=NULL
-           ,pwtoextract_pattern="bioplanet"
+           ,pwtoextract_pattern="inxight_pathways"
   ){
     #' @title
     #' MAIN -- Write BioPAX
@@ -39,7 +39,7 @@ MAIN_write_biopax<-
                       ,digits = 0)
                ," minutes.")
       write(msg
-            ,"log.txt"
+            ,"time_log.txt"
             ,sep = "\n"
             ,append=TRUE)
       message(msg)
@@ -70,7 +70,7 @@ MAIN_write_biopax<-
                       ,digits = 0)
                ," minutes.")
       write(msg
-            ,"log.txt"
+            ,"time_log.txt"
             ,sep = "\n"
             ,append=TRUE)
       message(msg)

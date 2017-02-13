@@ -1,7 +1,7 @@
 ######################################## MAIN_combine_clean_biopax_unifyids ########################################
 MAIN_combine_clean_biopax_unifyids<-
   function(new_biopax_list
-           ,pw_df_path="./_source_files/pathways_matched_to_sources_v016.xlsx"
+           ,pw_df_path="default"
            ,exclude_id_pattern="inxight_pathways"
   ){
     #' @title
@@ -14,11 +14,19 @@ MAIN_combine_clean_biopax_unifyids<-
     #' ID unification is conducted by appending a class of a component to its throughout number.
     #' E.g. for a component of class Protein, #11 from the top of the table, ID will be "Protein11".
     #' @param new_biopax_list List of BioPAX objects.
-    #' @param pw_df_path Path to the source table with pathway, id, name, and source values
+    #' @param pw_df_path Path to the source table with pathway, id, name, and source values.
     #' @param exclude_id_pattern Exclude pathways with such pattern in their IDs from ID unification.
       
     #' @author 
     #' Ivan Grishagin
+
+    #establish initial key parameters, if not supplied by user
+    if(pw_df_path=="default"){
+        pw_df_path<-
+          system.file("extdata"
+                      ,"pathways_matched_to_sources_current_version.xlsx"
+                      ,package="RIGbiopax")
+    }
     
     #load pathway spreadsheet
     pw_df<-

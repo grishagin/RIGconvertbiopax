@@ -1,6 +1,19 @@
 ######################################## interactions_df_to_biopax_dt ########################################
 interactions_df_to_biopax_dt<-
     function(interactions_df){
+        
+        #' @title
+        #' Convert Interactions Dataframe into BioPAX Data Table
+        #' @description 
+        #' Convert dataframe of interactions into a BioPAX-style data table. 
+        #' @details 
+        #' Takes in a dataframe returned by \code{MAIN_flatten_biopax}, 
+        #' and parses each value to return a BioPAX-style data table.
+        #' @param interactions_df \code{MAIN_flatten_biopax} output dataframe.
+        
+        #' @author 
+        #' Ivan Grishagin
+            
         st<-Sys.time()
         message("Converting a dataframe with interactions into a biopax data table...")
         
@@ -85,7 +98,7 @@ interactions_df_to_biopax_dt<-
                    ," minutes.")
         message(msg)
         write(msg
-              ,"log.txt"
+              ,"time_log.txt"
               ,sep = "\n"
               ,append=TRUE)
         

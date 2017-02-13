@@ -2,8 +2,8 @@
 MAIN_flatten_biopax<-
     function(pwid_to_convert=c("test5"
                                ,"all")
-             ,work_dir="D:/Dropbox/Rancho/NCATS/ToxDB/"
-             ,pw_df_path="./_source_files/pathways_matched_to_sources_v015.xlsx"
+             ,work_dir="default"
+             ,pw_df_path="default"
              ,biopax=NULL
              ,source_name=NULL
              ,groupnum=NULL
@@ -20,13 +20,26 @@ MAIN_flatten_biopax<-
         #' @param pwid_to_convert Which pathway IDs to process? Takes either a vector of pathway IDs, 
         #' or \code{test5} to process 5 random pathways (can change to any number), 
         #' or \code{all} to process all pathways.
-        #' @param combined_biopax BioPAX object.
-        #' @param what How to write: \code{onebig} (all pathways in one file), \code{manysmall} (one pathway per file) or \code{both}.
-        #' @param onebigfilename In case one file with all pathways desired, which name should be used for it?
-        #' @param pwtoextract_pattern Only pathways with IDs containing the pattern will be extracted.
+        #' @param pw_df_path Path to the source table with pathway, id, name, and source values.
+        #' @param biopax BioPAX object.
+        #' @param source_name BioPAX public source name.
+        #' @param groupnum Split pathway ids into \code{ngroups} groups. 
+        #' Only process group #\code{groupnum} out of a total of \code{ngroups}.
+        #' @param ngroups See \code{groupnum}.
         
         #' @author 
         #' Ivan Grishagin
+        
+        #establish key parameters, if not supplied by user
+        if(work_dir=="default"){
+            work_dir<-getwd()
+        }
+        if(pw_df_path=="default"){
+            pw_df_path<-
+                system.file("extdata"
+                            ,"pathways_matched_to_sources_current_version.xlsx"
+                            ,package="RIGbiopax")
+        }
         
         ########################## prepare
         if (!require("RIGessentials")){
@@ -146,7 +159,7 @@ MAIN_flatten_biopax<-
                 pw_df$biopax.Pathway.ID
             message("Extracting all "
                     ,length(pwid_to_convert)
-                    ," bioplanet pathways from "
+                    ," inxight pathways from "
                     ,source_name
                     ," biopax.")
         }
@@ -203,7 +216,7 @@ MAIN_flatten_biopax<-
                    ," minutes.")
         message(msg)
         write(msg
-              ,"log.txt"
+              ,"time_log.txt"
               ,sep = "\n"
               ,append=TRUE)
        

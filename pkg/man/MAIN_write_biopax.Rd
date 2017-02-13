@@ -5,7 +5,7 @@
 \title{MAIN -- Write BioPAX}
 \usage{
 MAIN_write_biopax(combined_biopax, what = c("both", "onebig", "manysmall"),
-  onebigfilename = NULL, pwtoextract_pattern = "bioplanet")
+  onebigfilename = NULL, pwtoextract_pattern = "inxight_pathways")
 }
 \arguments{
 \item{combined_biopax}{BioPAX object.}
