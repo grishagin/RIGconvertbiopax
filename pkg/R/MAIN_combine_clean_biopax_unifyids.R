@@ -30,9 +30,9 @@ MAIN_combine_clean_biopax_unifyids<-
     
     #load pathway spreadsheet
     pw_df<-
-      read_excel(path = pw_df_path
-                 ,col_types = rep("text",11)
-                 ,sheet = 1) %>%
+      read_excel_astext(path = pw_df_path
+                        #,col_types = rep("text",11)
+                        ,sheet = 1) %>%
       filter(!is.na(toxdb.Pathway.ID)
              ,!is.na(biopax.Pathway.ID)) %>%
       dplyr::select(toxdb.Pathway.ID

@@ -53,9 +53,9 @@ MAIN_biopax_comparison<-
                 NULL
         } else if(pwid_to_compare=="all"){
             pwid_to_compare<-
-                read_excel(path = pw_df_path
-                           ,col_types = rep("text",11)
-                           ,sheet = 1) %>%
+                read_excel_astext(path = pw_df_path
+                                  #,col_types = rep("text",11)
+                                  ,sheet = 1) %>%
                 filter(!is.na(biopax.Pathway.Name)
                        ,Source==source_name) %>%
                 .$biopax.Pathway.ID
