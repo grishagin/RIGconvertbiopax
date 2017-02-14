@@ -10,6 +10,7 @@ update_RIGconvertbiopax <-
         #' Ivan Grishagin
         
         
-        unloadNamespace(ns = "RIGconvertbiopax")
+        #unloadNamespace(ns = "RIGconvertbiopax")
+        devtools::unload(pkg = "RIGconvertbiopax")
         devtools::install_github("grishagin/RIGconvertbiopax", subdir = "pkg")
     }
