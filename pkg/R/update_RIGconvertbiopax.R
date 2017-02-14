@@ -11,6 +11,6 @@ update_RIGconvertbiopax <-
         
         
         #unloadNamespace(ns = "RIGconvertbiopax")
-        devtools::unload(pkg = "RIGconvertbiopax")
+        devtools::unload(pkg = inst("RIGconvertbiopax"))
         devtools::install_github("grishagin/RIGconvertbiopax", subdir = "pkg")
     }
