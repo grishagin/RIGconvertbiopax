@@ -40,8 +40,7 @@ internal_find_entity_params<-
         path_keys[[2]]<-
             c("1NA"
               ,"2memberPhysicalEntity"
-              ,"3memberPhysicalEntity_complexcomponent"
-              ,"4complexcomponent"
+              ,"3complexcomponent"
             )
         
         path_keys[[3]]<-

@@ -194,6 +194,18 @@ MAIN_flatten_biopax<-
                     ," biopax.")
         }
         ########################## pathways to convert
+        ########################## prepare biopax
+        
+        #replace memberPhysicalEntity with complex component
+        #for each such case, replace memberPhysicalEntity with component -- 
+        #because that's what it essentially is
+        mem_phys_ent_logi<-
+            biopax$dt$property=="memberPhysicalEntity" &
+            biopax$dt$class=="Complex"
+        biopax$dt$property[mem_phys_ent_logi]<-
+            "component"
+        
+        ########################## prepare biopax
         ########################## extract interactions from biopax
         st<-Sys.time()
         interactions_df<-
