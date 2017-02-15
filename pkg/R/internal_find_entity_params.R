@@ -38,15 +38,16 @@ internal_find_entity_params<-
               ,"4right"
             )
         path_keys[[2]]<-
-            c("NA"
-              ,"8memberPhysicalEntity"
-              ,"9complexcomponent"
+            c("1NA"
+              ,"2memberPhysicalEntity"
+              ,"3memberPhysicalEntity_complexcomponent"
+              ,"4complexcomponent"
             )
         
         path_keys[[3]]<-
-            c("5name"
-              ,"6entityReference_xref_dbid"
-              ,"7xref_dbid"
+            c("1name"
+              ,"2entityReference_xref_dbid"
+              ,"3xref_dbid"
             )
         
         path_keys_vect<-
@@ -81,7 +82,7 @@ internal_find_entity_params<-
             )
         
         paths_list<-
-            path_keys_vect %>%
+            path_keys_vect[45] %>%
             strsplit(split="_") %>%
             lapply(FUN=function(element){
                 path_elements_list[element] %>%
@@ -98,8 +99,8 @@ internal_find_entity_params<-
             lapply(paths_list
                    ,FUN=function(path,dFrame,entity_pav){
                        internal_follow_path_extract_value(dFrame = dFrame
-                                                 ,pid = entity_pav
-                                                 ,path_vector=path)
+                                                          ,pid = entity_pav
+                                                          ,path_vector=path)
                    }
                    ,dFrame=dFrame
                    ,entity_pav=entity_pav)
