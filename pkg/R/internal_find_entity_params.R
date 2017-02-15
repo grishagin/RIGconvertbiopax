@@ -82,7 +82,7 @@ internal_find_entity_params<-
             )
         
         paths_list<-
-            path_keys_vect[45] %>%
+            path_keys_vect %>%
             strsplit(split="_") %>%
             lapply(FUN=function(element){
                 path_elements_list[element] %>%
