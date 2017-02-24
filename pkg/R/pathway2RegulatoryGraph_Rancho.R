@@ -46,7 +46,7 @@ pathway2RegulatoryGraph_Rancho<-
         pw_component_list<-
             listPathwayComponents(biopax
                                   ,pwid
-                                  ,returnIDonly = T)
+                                  ,returnIDonly = TRUE)
         if (length(pw_component_list) == 0) {
             warning("Pathway seems to have no pathway components")
             return(NULL)
@@ -56,7 +56,8 @@ pathway2RegulatoryGraph_Rancho<-
                             ,id = pw_component_list
                             ,includeReferencedInstances = TRUE
                             ,returnCopy = TRUE)
-        pw_component_list$property = tolower(pw_component_list$property)
+        pw_component_list$property<-
+            tolower(pw_component_list$property)
         setkeyv(pw_component_list, cols = c("id"
                                             ,"class"
                                             ,"property"))
@@ -238,7 +239,7 @@ pathway2RegulatoryGraph_Rancho<-
                 rbind.data.frame(control_df)
             
         }
-        if(!is.null(control_df)){
+        if(is.null(control_df)){
             return(control_df)
         }
         control_df<-
