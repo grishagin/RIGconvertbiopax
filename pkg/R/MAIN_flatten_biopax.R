@@ -133,13 +133,14 @@ MAIN_flatten_biopax<-
         }
         
         ########################## get pathways and biopax
-        ########################## clean biopax
+        ########################## clean and prepare biopax
         biopax<-
             biopax %>% 
             clean_biopax_property_value %>% 
             #prepare biopax for flattening
             prepare_biopax_for_flattening
-        ########################## clean biopax
+        
+        ########################## clean and prepare biopax
         ########################## pathways to convert
         if(length(grep("test"
                        ,pwid_to_convert))>0){
@@ -197,12 +198,6 @@ MAIN_flatten_biopax<-
                     ," biopax.")
         }
         ########################## pathways to convert
-        ########################## prepare biopax
-        
-        biopax<-
-            internal_prepare_biopax_for_flattening(biopax)
-        
-        ########################## prepare biopax
         ########################## extract interactions from biopax
         st<-Sys.time()
         interactions_df<-
