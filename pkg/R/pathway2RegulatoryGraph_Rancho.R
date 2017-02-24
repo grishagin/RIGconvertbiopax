@@ -83,7 +83,7 @@ print(class(pw_controls))
         control_df<-NULL
         for (i in sort(unique(pw_controls$id))) {
             instance<-
-                pw_controls[id == i]
+                pw_controls[pw_controls$id == i]
             if (biopax$biopaxlevel == 2) {
                 type<-
                     as.character(instance[property == "control-type"]$property_value)
@@ -115,10 +115,10 @@ print(class(pw_controls))
                 NA
             for (i2 in controller_ids) {
                 c_instance<-
-                    pw_component_list[id == i2]
+                    pw_component_list[pw_controls$id == i2]
                 if (biopax$biopaxlevel == 2) {
                     c_instance<-
-                        pw_component_list[id == 
+                        pw_component_list[pw_controls$id == 
                                               striphash(c_instance[property == 
                                                                        "physical-entity"]$property_attr_value)]
                 }
@@ -160,7 +160,7 @@ print(class(pw_controls))
                 NA
             for (i2 in controlled_ids) {
                 c_instance<-
-                    pw_component_list[id == i2]
+                    pw_component_list[pw_controls$id == i2]
                 if (any(isOfClass(c_instance
                                   ,c("conversion")
                                   ,considerInheritance = TRUE)) || 
@@ -171,10 +171,10 @@ print(class(pw_controls))
                                                  property == "product"]$property_attr_value)
                     for (i3 in leftrights) {
                         leftrights_instance <-
-                            pw_component_list[id == i3]
+                            pw_component_list[pw_controls$id == i3]
                         if (biopax$biopaxlevel == 2) {
                             leftrights_instance<-
-                                pw_component_list[id == 
+                                pw_component_list[pw_controls$id == 
                                                       striphash(leftrights_instance[property == 
                                                                                         "physical-entity"]$property_attr_value)]
                         }
