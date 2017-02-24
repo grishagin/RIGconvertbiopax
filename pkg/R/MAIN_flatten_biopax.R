@@ -135,7 +135,10 @@ MAIN_flatten_biopax<-
         ########################## get pathways and biopax
         ########################## clean biopax
         biopax<-
-            clean_biopax_property_value(biopax)
+            biopax %>% 
+            clean_biopax_property_value %>% 
+            #prepare biopax for flattening
+            prepare_biopax_for_flattening
         ########################## clean biopax
         ########################## pathways to convert
         if(length(grep("test"
@@ -196,14 +199,8 @@ MAIN_flatten_biopax<-
         ########################## pathways to convert
         ########################## prepare biopax
         
-        #replace memberPhysicalEntity with complex component
-        #for each such case, replace memberPhysicalEntity with component -- 
-        #because that's what it essentially is
-        mem_phys_ent_logi<-
-            biopax$dt$property=="memberPhysicalEntity" &
-            biopax$dt$class=="Complex"
-        biopax$dt$property[mem_phys_ent_logi]<-
-            "component"
+        biopax<-
+            internal_prepare_biopax_for_flattening(biopax)
         
         ########################## prepare biopax
         ########################## extract interactions from biopax

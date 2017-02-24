@@ -8,5 +8,6 @@ export("biopax_dt_id_cleanup"
 		,"MAIN_flatten_biopax"
 		,"MAIN_write_biopax"
 		,"pathway2RegulatoryGraph_Rancho"
+		,"prepare_biopax_for_flattening"
 		,"update_RIGconvertbiopax"
 )
