@@ -78,13 +78,12 @@ pathway2RegulatoryGraph_Rancho<-
                               ,"control-type pathway components. Putting them together..."))
             }
         }
-
+print(class(pw_controls))
         #dataframe to store all controllers and controlleds
         control_df<-NULL
         for (i in sort(unique(pw_controls$id))) {
             instance<-
-                pw_controls %>% 
-                filter(id == i)
+                pw_controls[id == i]
             if (biopax$biopaxlevel == 2) {
                 type<-
                     as.character(instance[property == "control-type"]$property_value)
@@ -116,12 +115,12 @@ pathway2RegulatoryGraph_Rancho<-
                 NA
             for (i2 in controller_ids) {
                 c_instance<-
-                    pw_component_list %>% 
-                    filter(id == i2)
+                    pw_component_list[id == i2]
                 if (biopax$biopaxlevel == 2) {
                     c_instance<-
-                        pw_component_list %>% 
-                        filter(id == striphash(c_instance[property == "physical-entity"]$property_attr_value))
+                        pw_component_list[id == 
+                                              striphash(c_instance[property == 
+                                                                       "physical-entity"]$property_attr_value)]
                 }
                 if (splitComplexMolecules & 
                     any(isOfClass(c_instance 
@@ -161,8 +160,7 @@ pathway2RegulatoryGraph_Rancho<-
                 NA
             for (i2 in controlled_ids) {
                 c_instance<-
-                    pw_component_list %>% 
-                    filter(id == i2)
+                    pw_component_list[id == i2]
                 if (any(isOfClass(c_instance
                                   ,c("conversion")
                                   ,considerInheritance = TRUE)) || 
@@ -173,12 +171,12 @@ pathway2RegulatoryGraph_Rancho<-
                                                  property == "product"]$property_attr_value)
                     for (i3 in leftrights) {
                         leftrights_instance <-
-                            pw_component_list %>% 
-                            filter(id == i3)
+                            pw_component_list[id == i3]
                         if (biopax$biopaxlevel == 2) {
                             leftrights_instance<-
-                                pw_component_list %>% 
-                                filter(id == striphash(leftrights_instance[property == "physical-entity"]$property_attr_value))
+                                pw_component_list[id == 
+                                                      striphash(leftrights_instance[property == 
+                                                                                        "physical-entity"]$property_attr_value)]
                         }
                         if (splitComplexMolecules & 
                             any(isOfClass(leftrights_instance 
