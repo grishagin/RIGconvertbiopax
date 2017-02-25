@@ -172,7 +172,8 @@ MAIN_biopax_comparison<-
             status_df<-
                 status_vect %>% 
                 strsplit(split="\\|") %>% 
-                do.call(rbind.data.frame) %>% 
+                do.call(rbind.data.frame
+                        ,.) %>% 
                 cbind.data.frame(pwid_to_compare
                                  ,.)
             colnames(status_df)<-
