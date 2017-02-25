@@ -141,6 +141,7 @@ MAIN_biopax_comparison<-
                 curr_status<-
                     100*sum(new_bp_contr %in% orig_bp_contr)/length(new_bp_contr) %>% 
                     round(digits = 0)
+print(curr_status)
                     # identical(new_bp_contr
                     #           ,orig_bp_contr)
                 return(curr_status)
