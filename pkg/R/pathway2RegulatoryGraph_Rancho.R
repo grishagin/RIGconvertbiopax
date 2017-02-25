@@ -68,7 +68,7 @@ pathway2RegulatoryGraph_Rancho<-
                                   c("control"
                                     ,"catalysis"
                                     ,"modulation"
-                                    ,"templatereactionregulation"), ]
+                                    ,"templatereactionregulation")]
         
         if (length(pw_controls$id) == 0) {
             warning("warning: pathway2RegulatoryGraph_Rancho: supplied graph has no regulatory pathway components. Returning NULL.")
