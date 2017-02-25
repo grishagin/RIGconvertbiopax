@@ -151,9 +151,13 @@ MAIN_biopax_comparison<-
                 # extra_orig<-
                 #     orig_bp_contr[!orig_bp_contr %in% new_bp_contr] %>% 
                 #     paste(collapse=", ")
+                extra_new<-
+                    new_bp_contr[!new_bp_contr %in% orig_bp_contr] %>%
+                    paste(collapse="***")
                 curr_status<-
                     paste(new_in_orig
                           ,orig_in_new
+                          ,extra_new
                           ,sep=" | ")
                 
                     # identical(new_bp_contr

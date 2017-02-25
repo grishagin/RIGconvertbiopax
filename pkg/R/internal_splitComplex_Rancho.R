@@ -18,30 +18,51 @@ internal_splitComplex_Rancho<-
             stop("splitComplex: parameter biopax is neither biopax object nor compatible biopax data.table")
         }
         compname<-
-            c("COMPONENTS", "PHYSICAL-ENTITY")
+            c("COMPONENTS"
+              ,"PHYSICAL-ENTITY")
         if (biopaxlevel == 3) {
             compname<-c("component"
                         #added by Rancho
                         ,"memberPhysicalEntity")
         }
         ref<-
-            getReferencedIDs(df, complexid, recursive = recursive, 
-                             onlyFollowProperties = compname)
+            getReferencedIDs(df
+                             ,complexid
+                             ,recursive = recursive
+                             ,onlyFollowProperties = compname)
         if (is.null(ref)) 
             return(NULL)
         referenced<-
-            selectInstances(df, id = ref, returnCopy = FALSE, 
-                            biopaxlevel = biopaxlevel)
-        referenced<-
-            unique(as.character(referenced[tolower(class) %chin% 
-                                               c("dna", "rna", "protein", "smallmolecule")]$id))
+            selectInstances(df
+                            ,id = ref
+                            ,returnCopy = FALSE
+                            ,biopaxlevel = biopaxlevel) %>% 
+            filter(tolower(class) %chin% 
+                       c("dna"
+                         ,"rna"
+                         ,"protein"
+                         ,"smallmolecule")
+                   ,tolower(property) %chin%
+                       c("name"
+                         ,"displayname"
+                         ,"standardname"
+                         ,"term")) %>% 
+            dplyr::select(id
+                          ,name=property_value)
+        # referenced<-
+        #     unique(as.character(referenced[tolower(class) %chin% 
+        #                                        c("dna"
+        #                                          ,"rna"
+        #                                          ,"protein"
+        #                                          ,"smallmolecule")]$id))
         if (length(referenced) == 0) {
             return(NULL)
         }
         if (returnIDonly) {
             return(striphash(referenced))
         }
-        return(listInstances(df
-                             ,id = referenced
-                             ,biopaxlevel = biopaxlevel))
+        # return(listInstances(df
+        #                      ,id = referenced
+        #                      ,biopaxlevel = biopaxlevel))
+        return(referenced)
     }

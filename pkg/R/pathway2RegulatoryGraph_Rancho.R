@@ -186,27 +186,36 @@ pathway2RegulatoryGraph_Rancho<-
                                           ,"complex"))) {
                             if (useIDasNodenames) {
                                 controlleds<-
-                                    c(controlleds, as.character(internal_splitComplex_Rancho(pw_component_list
-                                                                                             ,i3
-                                                                                             ,returnIDonly = TRUE
-                                                                                             ,biopaxlevel = biopaxlevel)))
+                                    c(controlleds
+                                      ,as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                                 ,i3
+                                                                                 ,returnIDonly = TRUE
+                                                                                 ,biopaxlevel = biopaxlevel)))
                             } else {
                                 controlleds<-
-                                    c(controlleds, as.character(internal_splitComplex_Rancho(pw_component_list
-                                                                                             ,i3
-                                                                                             ,biopaxlevel = biopaxlevel)$name))
+                                    c(controlleds
+                                      ,as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                                 ,i3
+                                                                                 ,biopaxlevel = biopaxlevel)$name))
                             }
                         } else {
                             if (useIDasNodenames) {
                                 controlleds<-
                                     c(controlleds
-                                      ,as.character(leftrights_instance[1]$id))
+                                      ,as.character(leftrights_instance[1]$id)
+                                      ,as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                                 ,i3
+                                                                                 ,returnIDonly = TRUE
+                                                                                 ,biopaxlevel = biopaxlevel)))
                             } else {
                                 controlleds<-
                                     c(controlleds
                                       ,getInstanceProperty(pw_component_list
                                                            ,leftrights_instance[1]$id
-                                                           ,biopaxlevel = biopaxlevel))
+                                                           ,biopaxlevel = biopaxlevel)
+                                      ,as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                                 ,i3
+                                                                                 ,biopaxlevel = biopaxlevel)$name))
                             }
                         }
                     }
@@ -257,8 +266,9 @@ pathway2RegulatoryGraph_Rancho<-
             filter(controllers!=controlleds) %>%
             arrange(controllers
                     ,controlleds) %>% 
-            mutate(combo=paste0(controllers
-                                ,controlleds))
+            mutate(combo=paste(controllers
+                               ,controlleds
+                               ,sep="==="))
         
         if(returnGraph){
             newnodes<-
@@ -281,6 +291,8 @@ pathway2RegulatoryGraph_Rancho<-
             write.table(control_df
                         ,"test_comparison.txt"
                         ,sep = "\t"
+                        ,row.names=FALSE
+                        ,quote = FALSE
                         ,append = TRUE)
             return(control_df$combo)
         }
