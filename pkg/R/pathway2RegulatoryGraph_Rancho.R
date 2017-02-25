@@ -63,10 +63,12 @@ pathway2RegulatoryGraph_Rancho<-
         setkeyv(pw_component_list, cols = c("id"
                                             ,"class"
                                             ,"property"))
+test<-data.table(a=c(1,2),b=c(3,4))
+print(test[a==1])
 print(class(pw_component_list))
-print(pw_component_list)
+print(pw_component_list[id==1])
         pw_controls<-
-            pw_component_list[tolower(pw_component_list$class) %chin% 
+            pw_component_list[tolower(class) %chin% 
                                   c("control"
                                     ,"catalysis"
                                     ,"modulation"
