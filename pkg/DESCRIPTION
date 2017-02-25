@@ -6,6 +6,7 @@ Depends:
     tcltk,
     plyr,
     dplyr,
+	data.table,
     rBiopaxParser,
     RIGessentials,
 	RIGbiopax
