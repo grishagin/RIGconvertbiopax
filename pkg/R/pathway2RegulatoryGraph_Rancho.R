@@ -63,7 +63,7 @@ pathway2RegulatoryGraph_Rancho<-
         setkeyv(pw_component_list, cols = c("id"
                                             ,"class"
                                             ,"property"))
-
+        
         pw_controls<-
             pw_component_list[tolower(class) %chin% 
                                   c("control"
@@ -81,7 +81,7 @@ pathway2RegulatoryGraph_Rancho<-
                               ,"control-type pathway components. Putting them together..."))
             }
         }
-
+        
         #dataframe to store all controllers and controlleds
         control_df<-NULL
         for (i in sort(unique(pw_controls$id))) {
@@ -131,16 +131,16 @@ pathway2RegulatoryGraph_Rancho<-
                     if (useIDasNodenames) {
                         controllers<-
                             c(controllers
-                              ,as.character(splitComplex(pw_component_list 
-                                                         ,i2
-                                                         ,returnIDonly = T
-                                                         ,biopaxlevel = biopaxlevel)))
+                              ,as.character(internal_splitComplex_Rancho(pw_component_list 
+                                                                         ,i2
+                                                                         ,returnIDonly = TRUE
+                                                                         ,biopaxlevel = biopaxlevel)))
                     } else {
                         controllers<-
                             c(controllers
-                              ,as.character(splitComplex(pw_component_list
-                                                         ,i2
-                                                         ,biopaxlevel = biopaxlevel)$name))
+                              ,as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                         ,i2
+                                                                         ,biopaxlevel = biopaxlevel)$name))
                     }
                 } else {
                     if (useIDasNodenames) {
@@ -186,15 +186,15 @@ pathway2RegulatoryGraph_Rancho<-
                                           ,"complex"))) {
                             if (useIDasNodenames) {
                                 controlleds<-
-                                    c(controlleds, as.character(splitComplex(pw_component_list
-                                                                             ,i3
-                                                                             ,returnIDonly = T
-                                                                             ,biopaxlevel = biopaxlevel)))
+                                    c(controlleds, as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                                             ,i3
+                                                                                             ,returnIDonly = TRUE
+                                                                                             ,biopaxlevel = biopaxlevel)))
                             } else {
                                 controlleds<-
-                                    c(controlleds, as.character(splitComplex(pw_component_list
-                                                                             ,i3
-                                                                             ,biopaxlevel = biopaxlevel)$name))
+                                    c(controlleds, as.character(internal_splitComplex_Rancho(pw_component_list
+                                                                                             ,i3
+                                                                                             ,biopaxlevel = biopaxlevel)$name))
                             }
                         } else {
                             if (useIDasNodenames) {
@@ -229,11 +229,11 @@ pathway2RegulatoryGraph_Rancho<-
                 sort(controllers)
             controlleds<-
                 sort(controlleds)
-
+            
             if (length(controllers) == 0 | length(controlleds) == 0) {
                 next
             }
-           
+            
             if (tolower(type) == "activation") {
                 weights = 1
             } else {
@@ -285,6 +285,6 @@ pathway2RegulatoryGraph_Rancho<-
             return(control_df$combo)
         }
         
-       
+        
     }
 ######################################## pathway2RegulatoryGraph_Rancho ########################################

@@ -39,8 +39,8 @@ internal_find_entity_params<-
             )
         path_keys[[2]]<-
             c("1NA"
-              ,"2memberPhysicalEntity"
-              ,"3complexcomponent"
+              #,"memberPhysicalEntity" -- deprecated
+              ,"2complexcomponent"
             )
         
         path_keys[[3]]<-

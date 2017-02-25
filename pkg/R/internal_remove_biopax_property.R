@@ -6,12 +6,17 @@ internal_remove_biopax_property<-
         #entirely by connecting them to their targets directly
         #1. get instances with property
         #2. of those, take only refids
+        biopax$dt$property_attr_value<-
+            biopax$dt$property_attr_value %>% 
+            striphash
+            
         prop_df<-
             biopax$dt %>% 
             filter(property==property_to_remove
                    ,property_attr_value %in% id) %>% 
             dplyr::select(id
                           ,refid=property_attr_value)
+
         
         #3. prepare a list of ids to remove later
         #keep all those ids that are referenced by the referenced ids
@@ -34,6 +39,9 @@ internal_remove_biopax_property<-
         #replace refid with merged ids
         prop_df<-
             prop_df %>% 
+            #but first also add original ids to be able to keep the name properties
+            rbind.data.frame(data.frame(id=unique(.$id)
+                                        ,refid=unique(.$id))) %>% 
             merge_cols_shorten_df(colKey="id")
         
         biopax$dt$property_attr_value<-
@@ -42,11 +50,13 @@ internal_remove_biopax_property<-
                       ,to = prop_df$refid) 
         
         #5. remove all instances of undesired property
+        #(except those with non-zero value, i.e. name, etc.)
         #and ids they are referring to
         #and expand
         biopax$dt<-
             biopax$dt %>% 
-            filter(!id %in% ids_to_remove) %>% 
+            filter(!(id %in% ids_to_remove
+                     & property_value == "")) %>% 
             split_cols_lengthen_df(colsToSplit = "property_attr_value") %>% 
             as.data.table
         
