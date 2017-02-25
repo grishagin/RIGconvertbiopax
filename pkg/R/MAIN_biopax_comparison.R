@@ -138,10 +138,20 @@ MAIN_biopax_comparison<-
                    is.null(orig_bp_contr)){
                     return("nocomponents")
                 }
+                new_in_orig<-
+                    round(100*sum(new_bp_contr %in% orig_bp_contr)/length(new_bp_contr) 
+                          ,digits = 0)
+                orig_in_new<-
+                    round(100*sum(orig_bp_contr %in% new_bp_contr)/length(orig_bp_contr) 
+                          ,digits = 0)
+                extra_orig<-
+                    orig_bp_contr[!orig_bp_contr %in% new_bp_contr] %>% 
+                    paste(collapse=", ")
                 curr_status<-
-                    100*sum(new_bp_contr %in% orig_bp_contr)/length(new_bp_contr) 
-                curr_status<-
-                    round(curr_status,digits = 0)
+                    paste(new_in_orig
+                          ,orig_in_new
+                          ,extra_orig
+                          ,sep=" | ")
                 
                     # identical(new_bp_contr
                     #           ,orig_bp_contr)
@@ -152,7 +162,7 @@ MAIN_biopax_comparison<-
         if(!is.null(status_vect)){
             status_df<-
                 data_frame(pwid=pwid_to_compare
-                           ,identical=status_vect)
+                           ,`similarity, %`=status_vect)
             write.table(status_df
                         ,file = paste(Sys.Date()
                                       ,source_name
