@@ -7,7 +7,7 @@ pathway2RegulatoryGraph_Rancho<-
               ,useIDasNodenames = FALSE
               ,verbose = FALSE
               ,returnGraph=TRUE){
-        require(data.table)
+        print("boo")
         
         #' @title
         #' Pathway to Regulatory Graph
@@ -113,7 +113,15 @@ pathway2RegulatoryGraph_Rancho<-
                 next
             }
             controller_ids<-
-                striphash(as.character(unique(instance[property == "controller"]$property_attr_value)))
+                instance[property == "controller"]$property_attr_value %>% 
+                unique %>% 
+                as.character %>% 
+                striphash %>% 
+                #also find referenced ids which have memberPhysicalEntity property
+                c(getReferencedIDs(biopax = biopax
+                                   ,id = .
+                                   ,recursive=FALSE
+                                   ,onlyFollowProperties="memberPhysicalEntity"))
             controllers<-
                 NA
             for (i2 in controller_ids) {
@@ -158,7 +166,15 @@ pathway2RegulatoryGraph_Rancho<-
             }
             
             controlled_ids<-
-                striphash(as.character(unique(instance[property == "controlled"]$property_attr_value)))
+                instance[property == "controlled"]$property_attr_value %>% 
+                unique %>% 
+                as.character %>% 
+                striphash %>% 
+                #also find referenced ids which have memberPhysicalEntity property
+                c(getReferencedIDs(biopax = biopax
+                                   ,id = .
+                                   ,recursive=FALSE
+                                   ,onlyFollowProperties="memberPhysicalEntity"))
             controlleds<-
                 NA
             for (i2 in controlled_ids) {
@@ -222,17 +238,21 @@ pathway2RegulatoryGraph_Rancho<-
                 }
             }
             controllers<-
-                striphash(unique(controllers))
+                controllers %>% 
+                unique %>% 
+                striphash
             controlleds<-
-                striphash(unique(controlleds))
+                controlleds %>% 
+                unique %>% 
+                striphash
             controllers<-
-                controllers[!is.na(controllers) & 
-                                !is.null(controllers) & 
-                                nchar(controllers) > 0]
+                controllers[!is.na(controllers) 
+                            & !is.null(controllers) 
+                            & nchar(controllers) > 0]
             controlleds<-
-                controlleds[!is.na(controlleds) & 
-                                !is.null(controlleds) & 
-                                nchar(controlleds) > 0]
+                controlleds[!is.na(controlleds) 
+                            & !is.null(controlleds) 
+                            & nchar(controlleds) > 0]
             
             controllers<-
                 sort(controllers)

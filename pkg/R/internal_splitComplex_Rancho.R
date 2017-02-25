@@ -59,7 +59,7 @@ internal_splitComplex_Rancho<-
             return(NULL)
         }
         if (returnIDonly) {
-            return(striphash(referenced))
+            return(striphash(referenced$id))
         }
         # return(listInstances(df
         #                      ,id = referenced
