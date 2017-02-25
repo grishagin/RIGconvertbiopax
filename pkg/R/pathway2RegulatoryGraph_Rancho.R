@@ -7,8 +7,7 @@ pathway2RegulatoryGraph_Rancho<-
               ,useIDasNodenames = FALSE
               ,verbose = FALSE
               ,returnGraph=TRUE){
-        print("boo")
-        
+
         #' @title
         #' Pathway to Regulatory Graph
         #' @description 
