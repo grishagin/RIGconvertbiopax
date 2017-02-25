@@ -79,6 +79,9 @@ pathway2RegulatoryGraph_Rancho<-
             }
         }
 print(class(pw_controls))
+print(colnames(pw_controls))
+print(pw_controls)
+
         #dataframe to store all controllers and controlleds
         control_df<-NULL
         for (i in sort(unique(pw_controls$id))) {
