@@ -81,7 +81,10 @@ pathway2RegulatoryGraph_Rancho<-
 print(class(pw_controls))
 print(colnames(pw_controls))
 print(pw_controls)
-print(pw_controls[id=="Catalysis36"]
+# pw_controls<-
+#     pw_controls %>% 
+#     as.data.table
+print(pw_controls[id=="Catalysis36"])
 
         #dataframe to store all controllers and controlleds
         control_df<-NULL
