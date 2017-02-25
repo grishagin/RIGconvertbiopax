@@ -63,10 +63,7 @@ pathway2RegulatoryGraph_Rancho<-
         setkeyv(pw_component_list, cols = c("id"
                                             ,"class"
                                             ,"property"))
-test<-data.table(a=c(1,2),b=c(3,4))
-print(test[a==1])
-print(class(pw_component_list))
-print(pw_component_list[id==1])
+
         pw_controls<-
             pw_component_list[tolower(class) %chin% 
                                   c("control"
@@ -84,11 +81,6 @@ print(pw_component_list[id==1])
                               ,"control-type pathway components. Putting them together..."))
             }
         }
-print(class(pw_controls))
-print(colnames(pw_controls))
-print(pw_controls)
-
-print(pw_controls[id=="Catalysis36"])
 
         #dataframe to store all controllers and controlleds
         control_df<-NULL
@@ -264,7 +256,9 @@ print(pw_controls[id=="Catalysis36"])
             unique %>%
             filter(controllers!=controlleds) %>%
             arrange(controllers
-                    ,controlleds)
+                    ,controlleds) %>% 
+            mutate(combo=paste0(controllers
+                                ,controlleds))
         
         if(returnGraph){
             newnodes<-
@@ -284,7 +278,7 @@ print(pw_controls[id=="Catalysis36"])
             
             return(mygraph)
         } else {
-            return(control_df)
+            return(control_df$combo)
         }
         
        

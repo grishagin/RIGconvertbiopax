@@ -139,8 +139,10 @@ MAIN_biopax_comparison<-
                     return("nocomponents")
                 }
                 curr_status<-
-                    identical(new_bp_contr
-                              ,orig_bp_contr)
+                    100*sum(new_bp_contr %in% orig_bp_contr)/length(new_bp_contr) %>% 
+                    round(digits = 0)
+                    # identical(new_bp_contr
+                    #           ,orig_bp_contr)
                 return(curr_status)
             })
         
