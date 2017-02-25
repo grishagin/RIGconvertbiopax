@@ -307,12 +307,12 @@ pathway2RegulatoryGraph_Rancho<-
             
             return(mygraph)
         } else {
-            write.table(control_df
-                        ,"test_comparison.txt"
-                        ,sep = "\t"
-                        ,row.names=FALSE
-                        ,quote = FALSE
-                        ,append = TRUE)
+            # write.table(control_df
+            #             ,"test_comparison.txt"
+            #             ,sep = "\t"
+            #             ,row.names=FALSE
+            #             ,quote = FALSE
+            #             ,append = TRUE)
             return(control_df$combo)
         }
         
