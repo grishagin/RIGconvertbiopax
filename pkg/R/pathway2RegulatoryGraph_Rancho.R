@@ -7,6 +7,8 @@ pathway2RegulatoryGraph_Rancho<-
               ,useIDasNodenames = FALSE
               ,verbose = FALSE
               ,returnGraph=TRUE){
+        require(data.table)
+        
         #' @title
         #' Pathway to Regulatory Graph
         #' @description 
@@ -81,9 +83,7 @@ pathway2RegulatoryGraph_Rancho<-
 print(class(pw_controls))
 print(colnames(pw_controls))
 print(pw_controls)
-pw_controls<-
-    pw_controls %>%
-    as.data.table
+
 print(pw_controls[id=="Catalysis36"])
 
         #dataframe to store all controllers and controlleds
