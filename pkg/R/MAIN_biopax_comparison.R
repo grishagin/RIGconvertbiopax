@@ -17,7 +17,6 @@ MAIN_biopax_comparison<-
              
              
     ){
-print("boo")
         #' @title
         #' MAIN -- Compare BioPAX Objects
         #' @description 
@@ -51,6 +50,13 @@ print("boo")
                             ,"pathways_matched_to_sources_current_version.xlsx"
                             ,package="RIGbiopax")
         }
+        
+        #IMPORTANT! Clean original biopax values (the new one should be clean)
+        #otherwise there will be some inconsistencies
+        orig_biopax<-
+            orig_biopax %>% 
+            clean_biopax_property_value
+        
         
         st<-Sys.time()
         
@@ -187,7 +193,7 @@ print("boo")
                           ,length(new_bp_contr)
                           ,orig_in_new
                           ,length(orig_bp_contr)
-                          ,orig_bp_contr[!orig_bp_contr %in% new_bp_contr]
+                          #,orig_bp_contr[!orig_bp_contr %in% new_bp_contr]
                           ,sep=" | ")
                 
                 return(curr_status)
@@ -209,7 +215,7 @@ print("boo")
                   ,"N_new_control_components"
                   ,"orig-in-new, %"
                   ,"N_orig_control_components"
-                  ,"orig_not_in_new"
+                  #,"orig_not_in_new"
                   )
 
             write.table(status_df
