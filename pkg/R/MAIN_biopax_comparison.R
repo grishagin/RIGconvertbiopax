@@ -20,7 +20,7 @@ MAIN_biopax_comparison<-
         #' @description 
         #' Compare pathways in two BioPAX objects. 
         #' @details 
-        #' Allows to compare control components
+        #' Allows to compare all control components between two biopax objects.
         #' @param pwid_to_compare Which pathway IDs to use for the comparison of control components? Takes either a vector of pathway IDs, 
         #' or \code{all} to process all pathways, or \code{none} to not use this comparison at all.
         #' @param pwid_to_plot Which pathways to plot for subsequent visual inspection? Takes either a vector of pathway IDs, 
@@ -60,6 +60,36 @@ MAIN_biopax_comparison<-
                        ,Source==source_name) %>%
                 .$biopax.Pathway.ID
             
+        }
+        #take only a chunk of pathways based on quantile split provided
+        if (!is.null(groupnum)
+            & !is.null(ngroups)){
+            #get split intervals based on desired number of intervals 
+            #and vector length
+            quant_splits<-
+                quantile(1:length(pwid_to_compare)
+                         ,probs=seq(0,1
+                                    ,1/ngroups)
+                         ,type=1)
+            #define interval span
+            if(groupnum==1){
+                start<-1
+            } else {
+                start<-
+                    quant_splits[groupnum]+1
+            }
+            end<-
+                quant_splits[groupnum+1]
+            #cut out desired interval span
+            pwid_to_compare<-
+                pwid_to_compare[start:end]
+            message("Comparing pathways #"
+                    ,start
+                    ," to #"
+                    ,end
+                    ," from "
+                    ,source_name
+                    ," biopax.")
         }
         
         if(pwid_to_plot=="none"){
@@ -136,7 +166,7 @@ MAIN_biopax_comparison<-
                 #return "nocomponents"
                 if(is.null(new_bp_contr) &
                    is.null(orig_bp_contr)){
-                    return("nocomponents")
+                    return("no_control_components")
                 }
                 new_in_orig<-
                     round(100*sum(new_bp_contr %in% orig_bp_contr)/length(new_bp_contr) 

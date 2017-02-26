@@ -94,10 +94,9 @@ MAIN_flatten_biopax<-
                   ,"NCI-Nature"
                   ,"NetPath"
                   ,"Wiki Pathways"
-                  ,"Evgeny"
-                  ,"Ayesha"
                   ,"Science Signaling"
                   ,"Reactome"
+                  ,"RMC"
                 )
             
             #source name
