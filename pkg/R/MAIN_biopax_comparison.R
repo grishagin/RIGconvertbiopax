@@ -13,7 +13,7 @@ MAIN_biopax_comparison<-
              ,pw_df_path="default"
              ,source_name=NULL
              ,groupnum=NULL
-             ,ngroups
+             ,ngroups=NULL
              
              
     ){
