@@ -6,8 +6,8 @@ internal_cplx_split<-
         require(qdap)
         #define lowest level complex pattern
         #i.e. cplx(NAME)<<[COMPONENTS THAT ARE NOT COMPLEX]>>cplx
-        #pattern<-
-            #"cplx\\(([^\uff5f]*?)\\)<<\uff5f([^\uff5f\uff60]*)\uff60>>cplx"
+        pattern<-
+            "cplx\\(([^\uff5f]*?)\\)<<\uff5f([^\uff5f\uff60]*)\uff60>>cplx"
         
         #dataframe with all complexes in one complex
         cplx_df<-
@@ -42,15 +42,15 @@ internal_cplx_split<-
         
         #if there're more complexes in the new string
         #repeat the procedure recursively, append results
-        # if(length(grep("\uff60>>cplx"
-        #                ,string))>0){
-        #     cplx_new_df<-
-        #         internal_cplx_split(string
-        #                    ,lvl=lvl+1)
-        #     cplx_df<-
-        #         rbind.data.frame(cplx_new_df
-        #                          ,cplx_df)
-        # }
+        if(length(grep("\uff60>>cplx"
+                       ,string))>0){
+            cplx_new_df<-
+                internal_cplx_split(string
+                           ,lvl=lvl+1)
+            cplx_df<-
+                rbind.data.frame(cplx_new_df
+                                 ,cplx_df)
+        }
         
         return(cplx_df)
     }
