@@ -12,6 +12,8 @@ MAIN_biopax_comparison<-
              ,verbose = TRUE
              ,pw_df_path="default"
              ,source_name=NULL
+             ,groupnum=NULL
+             ,ngroups
              
              
     ){
@@ -34,6 +36,9 @@ MAIN_biopax_comparison<-
         #' @param verbose Logical. Show all pertaining progress?
         #' @param pw_df_path Path to the source table with pathway, id, name, and source values.
         #' @param source_name BioPAX public source name.
+        #' @param groupnum Split pathway ids into \code{ngroups} groups. 
+        #' Only process group #\code{groupnum} out of a total of \code{ngroups}.
+        #' @param ngroups See \code{groupnum}.
         
         #' @author 
         #' Ivan Grishagin
