@@ -176,19 +176,11 @@ MAIN_biopax_comparison<-
                 new_in_orig<-
                     round(100*sum(new_bp_contr %in% orig_bp_contr)/length(new_bp_contr) 
                           ,digits = 0) 
-                    # paste0("% length "
-                    #        ,length(new_bp_contr))
+                    
                 orig_in_new<-
                     round(100*sum(orig_bp_contr %in% new_bp_contr)/length(orig_bp_contr) 
                           ,digits = 0) 
-                    # paste0("% length "
-                    #        ,length(orig_bp_contr))
-                # extra_orig<-
-                #     orig_bp_contr[!orig_bp_contr %in% new_bp_contr] %>% 
-                #     paste(collapse=", ")
-                # extra_new<-
-                #     new_bp_contr[!new_bp_contr %in% orig_bp_contr] %>%
-                #     paste(collapse="***")
+                   
                 curr_status<-
                     paste(new_in_orig
                           ,length(new_bp_contr)
@@ -196,8 +188,6 @@ MAIN_biopax_comparison<-
                           ,length(orig_bp_contr)
                           ,sep=" | ")
                 
-                    # identical(new_bp_contr
-                    #           ,orig_bp_contr)
                 return(curr_status)
             })
         

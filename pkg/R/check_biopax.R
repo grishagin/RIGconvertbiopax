@@ -71,6 +71,7 @@ check_biopax<-
                                                ,pwid = pwid
                                                ,verbose = verbose
                                                ,returnGraph=TRUE)
+            
             if(is.null(graph)){
                 message("check_biopax: pwid "
                         ,pwid
@@ -87,9 +88,10 @@ check_biopax<-
                 ,height = 8400
                 ,res=2400
                 ,pointsize = 15)
+
             tryCatch(plotRegulatoryGraph(graph)
                      ,error = function(err) {
-                         message("plotRegulatoryGraph: error for pathway "
+                         message("plotRegulatoryGraph: error in pathway "
                                  ,pwid
                                  ,".\n"
                                  ,err)
