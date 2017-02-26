@@ -7,9 +7,6 @@ internal_cplx_split<-
         #define lowest level complex pattern
         #i.e. cplx(NAME)<<[COMPONENTS THAT ARE NOT COMPLEX]>>cplx
         pattern<-
-            #"cplx\\(([^\\)\\)]*)\\)<<\\[([^<<\\[\\]>>]*)\\]>>cplx"
-            #"cplx¦([^¦]*)?¦<<\\[([^<<\\[\\]>>]*)\\]>>cplx"
-            #"cplx\\((.*?)\\)<<\\[((?!cplx).*)\\]>>cplx"
             "cplx\\(([^\uff5f]*?)\\)<<\uff5f([^\uff5f\uff60]*)\uff60>>cplx"
         
         #dataframe with all complexes in one complex
