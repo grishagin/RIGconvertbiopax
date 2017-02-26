@@ -140,9 +140,9 @@ internal_follow_path_extract_value<-
                 to_return %>%
                 paste0("cplx"
                        ,complex_name
-                       ,"<<\uff5f"
+                       #,"<<\uff5f"
                        ,.
-                       ,"\uff60>>cplx"
+                       #,"\uff60>>cplx"
                 )
         }
         return(to_return)
