@@ -207,11 +207,11 @@ MAIN_biopax_comparison<-
                   ,"N_new_control_components"
                   ,"orig-in-new, %"
                   ,"N_orig_control_components")
-                data_frame(pwid=pwid_to_compare
-                           ,`similarity, %`=status_vect)
+
             write.table(status_df
                         ,file = paste(Sys.Date()
                                       ,source_name
+                                      ,groupnum
                                       ,"biopax comparison report.txt"
                         )
                         ,sep = "\t"
