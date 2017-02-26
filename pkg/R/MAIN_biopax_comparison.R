@@ -17,6 +17,7 @@ MAIN_biopax_comparison<-
              
              
     ){
+print("boo")
         #' @title
         #' MAIN -- Compare BioPAX Objects
         #' @description 
@@ -186,6 +187,7 @@ MAIN_biopax_comparison<-
                           ,length(new_bp_contr)
                           ,orig_in_new
                           ,length(orig_bp_contr)
+                          ,orig_bp_contr[!orig_bp_contr %in% new_bp_contr]
                           ,sep=" | ")
                 
                 return(curr_status)
@@ -206,7 +208,9 @@ MAIN_biopax_comparison<-
                   ,"new-in-orig, %"
                   ,"N_new_control_components"
                   ,"orig-in-new, %"
-                  ,"N_orig_control_components")
+                  ,"N_orig_control_components"
+                  ,"orig_not_in_new"
+                  )
 
             write.table(status_df
                         ,file = paste(Sys.Date()

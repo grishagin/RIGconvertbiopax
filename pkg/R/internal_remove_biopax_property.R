@@ -60,5 +60,11 @@ internal_remove_biopax_property<-
             split_cols_lengthen_df(colsToSplit = "property_attr_value") %>% 
             as.data.table
         
+        if("memberPhysicalEntity" %in% biopax$dt$property){
+            biopax<-
+                biopax %>% 
+                internal_remove_biopax_property(property_to_remove="memberPhysicalEntity")
+        }
+        
         return(biopax)
     }
