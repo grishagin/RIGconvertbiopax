@@ -41,7 +41,8 @@ internal_splitComplex_Rancho<-
                        c("dna"
                          ,"rna"
                          ,"protein"
-                         ,"smallmolecule")
+                         ,"smallmolecule"
+                         ,"physicalentity")
                    ,tolower(property) %chin%
                        c("name"
                          ,"displayname"

@@ -194,6 +194,7 @@ MAIN_biopax_comparison<-
                           ,orig_in_new
                           ,length(orig_bp_contr)
                           #,orig_bp_contr[!orig_bp_contr %in% new_bp_contr]
+                          #,new_bp_contr[!new_bp_contr %in% orig_bp_contr]
                           ,sep=" | ")
                 
                 return(curr_status)
@@ -216,6 +217,7 @@ MAIN_biopax_comparison<-
                   ,"orig-in-new, %"
                   ,"N_orig_control_components"
                   #,"orig_not_in_new"
+                  #,"new_not_in_orig"
                   )
 
             write.table(status_df
