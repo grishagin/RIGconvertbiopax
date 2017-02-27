@@ -77,7 +77,9 @@ assemble_biopax_conversion_chuncks<-
         #and assign it to properly named variable
         #for future convenience
         biopax_name<-
-            paste0(tolower(bpname)
+            paste0(gsub(" |-"
+                        ,"_"
+                        ,tolower(bpname))
                    ,"_biopax")
         assign(biopax_name
                ,biopax_full)
