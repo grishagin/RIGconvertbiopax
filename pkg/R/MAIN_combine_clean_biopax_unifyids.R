@@ -89,6 +89,8 @@ MAIN_combine_clean_biopax_unifyids<-
                  ," not all desired pathways are present.\n"
                  ,"The following ids are not present:\n"
                  ,missing_ids)
+            writeLines(new_biopax_list[[lindex]]$dt$id
+                       ,"log.txt")
         }
         
         #for those ids, replace biopax ids with inxight pathway ids
