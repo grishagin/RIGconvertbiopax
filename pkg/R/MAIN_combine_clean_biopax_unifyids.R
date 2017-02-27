@@ -80,6 +80,12 @@ MAIN_combine_clean_biopax_unifyids<-
           pw_df %>%
           filter(Source %in% names(new_biopax_list)[lindex])
         
+        if(!all(temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id)){
+            stop("MAIN_combine_clean_biopax_unifyids: in the biopax list element "
+                 ,names(new_biopax_list)[lindex]
+                 ," not all desired pathways are present.")
+        }
+        
         #for those ids, replace biopax ids with inxight pathway ids
         temp_unif_df<-
           new_biopax_list[[lindex]]$dt %>%
