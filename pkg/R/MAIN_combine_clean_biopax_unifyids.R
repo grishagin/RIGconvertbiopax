@@ -84,13 +84,14 @@ MAIN_combine_clean_biopax_unifyids<-
             temp_pw_df$biopax.Pathway.ID[!temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id]
         
         if(length(missing_ids)>0){
+            writeLines(new_biopax_list[[lindex]]$dt$id
+                       ,"log.txt")
             stop("MAIN_combine_clean_biopax_unifyids: in the biopax list element "
                  ,names(new_biopax_list)[lindex]
                  ," not all desired pathways are present.\n"
                  ,"The following ids are not present:\n"
                  ,missing_ids)
-            writeLines(new_biopax_list[[lindex]]$dt$id
-                       ,"log.txt")
+           
         }
         
         #for those ids, replace biopax ids with inxight pathway ids
