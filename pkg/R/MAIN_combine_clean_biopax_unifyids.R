@@ -81,7 +81,7 @@ MAIN_combine_clean_biopax_unifyids<-
           filter(Source %in% names(new_biopax_list)[lindex])
         
         missing_ids<-
-            temp_pw_df$biopax.Pathway.ID[temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id]
+            temp_pw_df$biopax.Pathway.ID[!temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id]
         
         if(length(missing_ids)>0){
             stop("MAIN_combine_clean_biopax_unifyids: in the biopax list element "
