@@ -98,7 +98,8 @@ assemble_biopax_conversion_chuncks<-
               & grepl("\\.txt"
                       ,.)] %>% 
             lapply(read.delim
-                   ,quote="") %>% 
+                   ,quote=""
+                   ,check.names = FALSE) %>% 
             do.call(rbind.data.frame
                     ,.) %>% 
             mutate(Source=bpname)
@@ -160,4 +161,5 @@ assemble_biopax_conversion_chuncks<-
                  file.path("./merged_results"
                            ,rdata_outfile)
              ,envir = environment())
+        return()
     }
