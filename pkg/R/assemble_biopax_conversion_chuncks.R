@@ -1,5 +1,5 @@
 assemble_biopax_conversion_chuncks<-
-    function(folder
+    function(folder=NULL
              ,bindex){
         #' @title
         #' Assemble Files from BioPAX Conversion Process
@@ -22,6 +22,10 @@ assemble_biopax_conversion_chuncks<-
         
         dir.create(path = "./merged_results"
                    ,showWarnings = FALSE)
+        if(is.null(folder)){
+            folder<-
+                getwd()
+        }
         
         ############# make file lists
         biopax_source_names<-
@@ -52,22 +56,31 @@ assemble_biopax_conversion_chuncks<-
                       ,.)] 
         sapply(rdata_files
                ,load
-               ,envir = .GlobalEnv)
+               ,envir = environment())
         pieces<-
             grep(ls()
                  ,pattern = paste0(bpname
                                    ,"chunck_biopax")
                  ,value=TRUE)
+
+        #prepare full biopax
         biopax_full<-
             lapply(pieces
                    ,function(biopax_name){
                        biopax_obj<-
-                           get(biop_name)
+                           get(biopax_name)
                        return(biopax_obj$dt)
                    }) %>%
             do.call(rbind.data.frame
                     ,.) %>% 
             biopax_from_dt
+        #and assign it to properly named variable
+        #for future convenience
+        biopax_name<-
+            paste0(tolower(bpname)
+                   ,"_biopax")
+        assign(biopax_name
+               ,biopax_full)
         
         rdata_outfile<-
             paste(Sys.Date()
@@ -81,6 +94,8 @@ assemble_biopax_conversion_chuncks<-
             .[grepl(bpname
                     ,.)
               & grepl("comparison"
+                      ,.)
+              & grepl("\\.txt"
                       ,.)] %>% 
             lapply(read.delim
                    ,quote="") %>% 
@@ -100,6 +115,8 @@ assemble_biopax_conversion_chuncks<-
             .[grepl(bpname
                     ,.)
               & grepl("interaction"
+                      ,.)
+              & grepl("\\.txt"
                       ,.)] %>% 
             lapply(read.delim
                    ,quote="") %>% 
@@ -129,12 +146,18 @@ assemble_biopax_conversion_chuncks<-
                     ,sep = "\t"
                     ,row.names = FALSE
                     ,col.names = TRUE)
-        
-        rm(list=ls()[!ls() %in% c("biopax_full"
-                                  ,rdata_outfile)])
+        #gather all appropriate variables
+        all_vars<-
+            ls(envir = environment())
+        #and remove them
+        rm(list=all_vars[!all_vars %in% c(biopax_name
+                                          ,"rdata_outfile")]
+           ,envir = environment())
         
         #save image
-        save.image(file.path("./merged_results"
-                             ,rdata_outfile))
-           
+        save(list = ls(all.names = TRUE)
+             ,file = 
+                 file.path("./merged_results"
+                           ,rdata_outfile)
+             ,envir = environment())
     }
