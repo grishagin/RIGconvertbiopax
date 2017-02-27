@@ -12,4 +12,3 @@ Updates the package. It may be necessary to restart the R session after the upda
 \author{
 Ivan Grishagin
 }
-

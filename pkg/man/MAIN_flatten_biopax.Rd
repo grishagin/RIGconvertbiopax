@@ -35,4 +35,3 @@ Each complex component is represented as a special string structure, similar to 
 \author{
 Ivan Grishagin
 }
-

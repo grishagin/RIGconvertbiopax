@@ -7,7 +7,8 @@
 MAIN_biopax_comparison(pwid_to_compare = c("all", "none"),
   pwid_to_plot = c("none", "same", "test5"), new_biopax, orig_biopax,
   new_biopax_tag = "_new", orig_biopax_tag = "_orig", verbose = TRUE,
-  pw_df_path = "default", source_name = NULL)
+  pw_df_path = "default", source_name = NULL, groupnum = NULL,
+  ngroups = NULL)
 }
 \arguments{
 \item{pwid_to_compare}{Which pathway IDs to use for the comparison of control components? Takes either a vector of pathway IDs, 
@@ -31,14 +32,18 @@ or \code{none} to not use this comparison at all.}
 \item{pw_df_path}{Path to the source table with pathway, id, name, and source values.}
 
 \item{source_name}{BioPAX public source name.}
+
+\item{groupnum}{Split pathway ids into \code{ngroups} groups. 
+Only process group #\code{groupnum} out of a total of \code{ngroups}.}
+
+\item{ngroups}{See \code{groupnum}.}
 }
 \description{
 Compare pathways in two BioPAX objects.
 }
 \details{
-Allows to compare control components
+Allows to compare all control components between two biopax objects.
 }
 \author{
 Ivan Grishagin
 }
-

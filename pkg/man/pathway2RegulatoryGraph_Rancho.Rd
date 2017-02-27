@@ -32,4 +32,3 @@ Returns either a graph or a dataframe with control-type components.
 \author{
 Ivan Grishagin
 }
-

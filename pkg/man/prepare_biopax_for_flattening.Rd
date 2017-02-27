@@ -19,4 +19,3 @@ references to instances with \code{memberPhysicalEntity} property with reference
 \author{
 Ivan Grishagin
 }
-

@@ -19,4 +19,3 @@ Outputs a BioPAX-style datatable.
 \author{
 Ivan Grishagin
 }
-

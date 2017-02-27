@@ -19,4 +19,3 @@ and parses each value to return a BioPAX-style data table.
 \author{
 Ivan Grishagin
 }
-

@@ -26,4 +26,3 @@ E.g. for a component of class Protein, #11 from the top of the table, ID will be
 \author{
 Ivan Grishagin
 }
-

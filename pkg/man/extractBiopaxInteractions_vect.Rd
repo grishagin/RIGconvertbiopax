@@ -25,4 +25,3 @@ Also outputs the resultant dataframe as *.txt and *.xlsx files.
 \author{
 Ivan Grishagin
 }
-

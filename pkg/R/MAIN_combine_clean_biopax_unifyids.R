@@ -119,11 +119,33 @@ MAIN_combine_clean_biopax_unifyids<-
     #clean biopax object from utf tags
     combined_biopax$dt$property_value<-
       combined_biopax$dt$property_value %>%
-      gsub("â\u0080?|\u009c|\u0080|\u009c|\u201aàö\u221a©¬¨¬µ"
+      gsub("\u00e2\u0080\\?|\u009c|\u0080|\u009c|\u00c3\u00ac"
            ,""
            ,.) %>%
-      mgsub(c("\u03b3","\u03b6","\u03bb","\u03ba","Ã\u009f","&gt;","&apos;","&")
-            ,c("g","z","l","k","beta",">","'","and")
+      mgsub(c("\u03b3","\u03b6","\u03bb","\u03ba","\u00c3\u009f","&gt;","&apos;","&"
+              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0080\u009c"
+              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2"
+              ,"\u00e2\u0093"
+              ,"\u00e2\u0094"
+              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0084\u00a2"
+              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2\u00b2"
+              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c5\u0093"
+              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2?"
+              ,"\u0093"
+              ,"\u0094"
+              )
+            ,c("g","z","l","k","beta",">","'","and"
+               ,"-"
+               ,"-"
+               ,"-"
+               ,"-"
+               ,"'"
+               ,"'"
+               ,"\""
+               ,"\""
+               ,"\""
+               ,"\""
+               )
             ,.)
     return(combined_biopax)
     

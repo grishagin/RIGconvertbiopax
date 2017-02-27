@@ -26,4 +26,3 @@ Plot regulatory graph for each supplied pathway.
 \author{
 Ivan Grishagin
 }
-

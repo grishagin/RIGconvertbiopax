@@ -19,4 +19,3 @@ Takes in a BioPAX object and returns a dataframe of all "interactions", one per 
 \author{
 Ivan Grishagin
 }
-
