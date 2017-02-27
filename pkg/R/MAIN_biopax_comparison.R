@@ -17,6 +17,7 @@ MAIN_biopax_comparison<-
              
              
     ){
+print("boo")
         #' @title
         #' MAIN -- Compare BioPAX Objects
         #' @description 
@@ -210,16 +211,30 @@ MAIN_biopax_comparison<-
                         ,.) %>% 
                 cbind.data.frame(pwid_to_compare
                                  ,.)
-            colnames(status_df)<-
-                c("pwid"
-                  ,"new-in-orig, %"
-                  ,"N_new_control_components"
-                  ,"orig-in-new, %"
-                  ,"N_orig_control_components"
-                  #,"orig_not_in_new"
-                  #,"new_not_in_orig"
-                  )
-
+            #if there are no components, there will be only 2 columns
+            if(ncol(status_df)==2){
+                #append 3 columns
+                colnames(status_df)<-
+                    c("col1"
+                      ,"col2")
+                status_df<-
+                    status_df %>% 
+                    mutate(col3=col2
+                           ,col4=col2
+                           ,col5=col2)
+            } else if(ncol(status_df)!=5){
+                warning("MAIN_biopax_comparison: number of columns in the final output is neither 2 nor 5! Weird!")
+            }
+            try(colnames(status_df)<-
+                    c("pwid"
+                      ,"new-in-orig, %"
+                      ,"N_new_control_components"
+                      ,"orig-in-new, %"
+                      ,"N_orig_control_components"
+                      #,"orig_not_in_new"
+                      #,"new_not_in_orig"
+                    ))
+            
             write.table(status_df
                         ,file = paste(Sys.Date()
                                       ,source_name
