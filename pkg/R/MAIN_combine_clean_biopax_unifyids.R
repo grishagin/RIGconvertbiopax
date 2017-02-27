@@ -80,10 +80,15 @@ MAIN_combine_clean_biopax_unifyids<-
           pw_df %>%
           filter(Source %in% names(new_biopax_list)[lindex])
         
-        if(!all(temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id)){
+        missing_ids<-
+            temp_pw_df$biopax.Pathway.ID[temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id]
+        
+        if(length(missing_ids)>0){
             stop("MAIN_combine_clean_biopax_unifyids: in the biopax list element "
                  ,names(new_biopax_list)[lindex]
-                 ," not all desired pathways are present.")
+                 ," not all desired pathways are present.\n"
+                 ,"The following ids are not present:\n"
+                 ,missing_ids)
         }
         
         #for those ids, replace biopax ids with inxight pathway ids
@@ -115,12 +120,7 @@ MAIN_combine_clean_biopax_unifyids<-
     
     combined_biopax<-
       biopax_from_dt(final_biopax_dt)
-    
-    
-    pwtoextract<-
-      pw_df %>%
-      filter(Source %in% names(new_biopax_list)) %>%
-      .$toxdb.Pathway.ID
+
     
     #clean biopax object from utf tags
     combined_biopax$dt$property_value<-
