@@ -31,18 +31,16 @@ MAIN_write_biopax<-
         biopax_from_dt(combined_biopax$dt
                        ,onebigfilename)
       et <- Sys.time()
+      
       msg<-
-        paste0("The whole thing took "
-               ,round(x = difftime(et 
-                                   ,st
-                                   ,units = "mins")
-                      ,digits = 0)
-               ," minutes.")
+          message("Writing BioPAX object to one large file took "
+                  ,round(x = difftime(et,st,units="secs")
+                         ,digits = 0)
+                  ," seconds.")
       write(msg
             ,"time_log.txt"
             ,sep = "\n"
             ,append=TRUE)
-      message(msg)
     }
     
     if(what %in% c("both","manysmall")){
@@ -63,12 +61,10 @@ MAIN_write_biopax<-
         )
       et <- Sys.time()
       msg<-
-        paste0("The whole thing took "
-               ,round(x = difftime(et 
-                                   ,st
-                                   ,units = "mins")
-                      ,digits = 0)
-               ," minutes.")
+          message("Writing BioPAX object to multiple files "
+                  ,round(x = difftime(et,st,units="mins")
+                         ,digits = 1)
+                  ," minutes.")
       write(msg
             ,"time_log.txt"
             ,sep = "\n"

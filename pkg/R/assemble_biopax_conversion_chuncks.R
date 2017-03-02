@@ -73,6 +73,7 @@ assemble_biopax_conversion_chuncks<-
                    }) %>%
             do.call(rbind.data.frame
                     ,.) %>% 
+            unique %>% 
             biopax_from_dt
         #and assign it to properly named variable
         #for future convenience
