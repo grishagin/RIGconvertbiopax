@@ -119,13 +119,15 @@ MAIN_combine_clean_biopax_unifyids<-
             #re-label the ids of a joint biopax table
             unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
                              ,exclude_class = "Pathway") %>% 
-            unique
+            unique %>% 
+            as.data.table
         
         dict<-
-            data.table(from=c("eIF2B[^[:graph:][:space:]]+"
+            data.table(from=c("\u201A\u00e0\u00f6\u221a\u00a9\u00ac\u00a8\u00ac\u00b5"
                               ,"\u00c3\u008e\u00c2\u00b2"
                               ,"\u00c3\u009f","&gt;","&apos;","&"
-                              
+                              ,"\u00e2\u0080\u009c"
+                              ,"\u00e2\u0080?"
                               ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0080\u009c"
                               ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2"
                               ,"\u00e2\u0093"
@@ -136,9 +138,11 @@ MAIN_combine_clean_biopax_unifyids<-
                               ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2?"
                               ,"\u0093"
                               ,"\u0094")
-                       ,to=c("eIF2B-epsilon"
+                       ,to=c("\u03b5"
                              ,"\u03b2"
                              ,"\u03b2",">","'","and"
+                             ,""
+                             ,""
                              ,"-"
                              ,"-"
                              ,"-"
@@ -157,61 +161,13 @@ MAIN_combine_clean_biopax_unifyids<-
         badsymbol_rows<-
             final_biopax_dt[property_value!=""]$property_value %>% 
             grepl("[^[:graph:][:space:]]"
-                  ,.)
+                  ,.) 
         
         final_biopax_dt[property_value!=""][badsymbol_rows]$property_value<-
             final_biopax_dt[property_value!=""][badsymbol_rows]$property_value %>%
             mgsub(pattern = dict$from
                   ,replacement = dict$to
                   ,text.var = .)
-            
-        # testdt<-
-        #     combined_biopax$dt[property_value!=""] %>% 
-        #     mgsub(pattern = dict$from
-        #           ,replacement = dict$to
-        #           ,text.var = .)
-        #     
-        #     testdt<-
-        #     combined_biopax$dt %>% 
-            # gsub("\u00e2\u0080\\?|\u009c|\u0080|\u009c|\u00c3\u00ac"
-            #      ,""
-            #      ,.) %>%
-            # gsub("eIF2B[^[:graph:][:space:]]+"
-            #      ,"eIF2B-epsilon"
-            #      ,.) %>%
-            # mgsub(c("\u03b3","\u03b6","\u03bb","\u03ba","\u00c3\u009f","&gt;","&apos;","&"
-            #         
-            #         
-            #     ,"\u00c3\u008e\u00c2\u00b2"
-            #         
-            #         ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0080\u009c"
-            #         ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2"
-            #         ,"\u00e2\u0093"
-            #         ,"\u00e2\u0094"
-            #         ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0084\u00a2"
-            #         ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2\u00b2"
-            #         ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c5\u0093"
-            #         ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2?"
-            #         ,"\u0093"
-            #         ,"\u0094")
-            #       ,c("g","z","l","k","beta",">","'","and"
-            #          
-            #          
-            #          ,"\u03b2"
-            #          
-            #          
-            #          ,"-"
-            #          ,"-"
-            #          ,"-"
-            #          ,"-"
-            #          ,"'"
-            #          ,"'"
-            #          ,"\""
-            #          ,"\""
-            #          ,"\""
-            #          ,"\""
-            #       )
-            #       ,.)
         
         combined_biopax<-
             biopax_from_dt(final_biopax_dt)
