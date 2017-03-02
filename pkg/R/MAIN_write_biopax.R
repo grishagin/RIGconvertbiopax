@@ -70,6 +70,26 @@ MAIN_write_biopax<-
             ,sep = "\n"
             ,append=TRUE)
       message(msg)
+      
+      #try to archive all files
+      bigtarname<-
+          onebigfilename %>% 
+          gsub("\\.owl$"
+               ,""
+               ,.) %>% 
+          paste0(".tar.gz")
+      try(make_targz(input_names = onebigfilename
+                     ,output_name = bigtarname))
+      smalltarname<-
+          paste(Sys.Date()
+                ,"inxight_pathways--individual.tar.gz"
+                ,sep="_")
+      smallfiles<-
+          list.files(pattern="\\.owl$") %>% 
+          .[!. %in% onebigfilename]
+      try(make_targz(input_names = smallfiles
+                     ,output_name = smalltarname))
+
     }
   }
 ######################################## MAIN_write_biopax ########################################
