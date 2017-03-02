@@ -61,7 +61,7 @@ MAIN_write_biopax<-
         )
       et <- Sys.time()
       msg<-
-          message("Writing BioPAX object to multiple files "
+          message("Writing BioPAX object to multiple files took "
                   ,round(x = difftime(et,st,units="mins")
                          ,digits = 1)
                   ," minutes.")
