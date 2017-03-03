@@ -72,7 +72,7 @@ MAIN_write_biopax<-
             
             #pathways to extract and write
             #if not specified,
-            if(is.null(pwtoextract)){
+            if(pwtoextract=="default"){
                 #then search for pathways by pattern
                 if(!is.null(pwtoextract_pattern)){
                     pwtoextract<-
