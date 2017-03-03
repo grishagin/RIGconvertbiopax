@@ -54,7 +54,8 @@ internal_MAIN_step1_all_biopax_split_interaction_tables<-
                    ,"chunck_df"
                    ,groupnum)
         assign(df_var_name
-               ,temp_inter_df)
+               ,temp_inter_df
+               ,envir = environment())
         #save image
         save(list = ls(all.names = TRUE)
              ,file = 
@@ -75,7 +76,8 @@ internal_MAIN_step1_all_biopax_split_interaction_tables<-
                    ,"chunck_biopax"
                    ,groupnum)
         assign(bp_var_name
-               ,temp_new_biopax)
+               ,temp_new_biopax
+               ,envir = environment())
         
         save(list = ls(all.names = TRUE)
              ,file = 

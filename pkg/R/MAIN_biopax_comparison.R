@@ -17,7 +17,6 @@ MAIN_biopax_comparison<-
              
              
     ){
-print("boo")
         #' @title
         #' MAIN -- Compare BioPAX Objects
         #' @description 
@@ -239,8 +238,8 @@ print("boo")
                         ,file = paste(Sys.Date()
                                       ,source_name
                                       ,groupnum
-                                      ,"biopax comparison report.txt"
-                        )
+                                      ,"biopax_comparison_report.txt"
+                                      ,sep="_")
                         ,sep = "\t"
                         ,quote = FALSE
                         ,row.names = FALSE
