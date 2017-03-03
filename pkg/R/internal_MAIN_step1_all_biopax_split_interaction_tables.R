@@ -56,11 +56,14 @@ internal_MAIN_step1_all_biopax_split_interaction_tables<-
         assign(df_var_name
                ,temp_inter_df)
         #save image
-        save.image(paste0("df_"
-                          ,biopax_source_names[bindex]
-                          ,groupnum
-                          ,".RData"))
-        
+        save(list = ls(all.names = TRUE)
+             ,file = 
+                 paste0("df_"
+                        ,biopax_source_names[bindex]
+                        ,groupnum
+                        ,".RData")
+             ,envir = environment())
+
         temp_new_biopax<-
             temp_inter_df %>% 
             interactions_df_to_biopax_dt %>%
@@ -74,10 +77,13 @@ internal_MAIN_step1_all_biopax_split_interaction_tables<-
         assign(bp_var_name
                ,temp_new_biopax)
         
-        save.image(paste0("biopax_df_"
-                          ,biopax_source_names[bindex]
-                          ,groupnum
-                          ,".RData"))
+        save(list = ls(all.names = TRUE)
+             ,file = 
+                 paste0("biopax_df_"
+                        ,biopax_source_names[bindex]
+                        ,groupnum
+                        ,".RData")
+             ,envir = environment())
         
         try(MAIN_biopax_comparison(pwid_to_compare=pwid_to_convert
                                    ,pwid_to_plot="none"
@@ -99,6 +105,10 @@ internal_MAIN_step1_all_biopax_split_interaction_tables<-
                                   ,bp_var_name
                                   ,"clean_save_name")]
            ,envir = environment())
-        save.image(clean_save_name)
+
+        save(list = ls(all.names = TRUE)
+             ,file = 
+                 clean_save_name
+             ,envir = environment())
     }
       

@@ -47,18 +47,28 @@ internal_MAIN_step3_combine_write_biopax<-
         
         
         ################# rdata files
+        #present sources
+        present_biopax_logi<-
+            biopax_obj_names %in% ls(envir = environment())
+        #redefine source names 
+        biopax_source_names<-
+            biopax_source_names[present_biopax_logi]
+        biopax_obj_names<-
+            biopax_obj_names[present_biopax_logi]
+            
         rdata_files<-
             all_files %>% 
             .[grepl("biopax_object_workspace"
                     ,.)] 
-        sapply(rdata_files
-               ,load
-               ,envir = environment())
+        invisible(sapply(rdata_files
+                         ,load
+                         ,envir = environment()))
         
         #prepare biopax objects' list
         biopax_obj_list<-
             biopax_obj_names %>% 
-            lapply(get)
+            lapply(get
+                   ,envir=environment())
         names(biopax_obj_list)<-
             biopax_source_names
         ################# comparison files
