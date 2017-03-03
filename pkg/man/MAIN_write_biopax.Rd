@@ -5,7 +5,9 @@
 \title{MAIN -- Write BioPAX}
 \usage{
 MAIN_write_biopax(combined_biopax, what = c("both", "onebig", "manysmall"),
-  onebigfilename = NULL, pwtoextract_pattern = "inxight_pathways")
+  onebigfilename = NULL, pwtoextract_pattern = "inxight_pathways",
+  pwtoextract = "default", bigtarname = "default",
+  smalltarname = "default")
 }
 \arguments{
 \item{combined_biopax}{BioPAX object.}
@@ -15,6 +17,12 @@ MAIN_write_biopax(combined_biopax, what = c("both", "onebig", "manysmall"),
 \item{onebigfilename}{In case one file with all pathways desired, which name should be used for it?}
 
 \item{pwtoextract_pattern}{Only pathways with IDs containing the pattern will be extracted.}
+
+\item{pwtoextract}{IDs of pathways to extract. Trumps \code{pwtoextract_pattern}.}
+
+\item{bigtarname}{Name of the tar.gz archive with one large pathway file.}
+
+\item{smalltarname}{Name of the tar.gz archive with individual pathway files.}
 }
 \description{
 Wrapper for a \code{biopax_from_dt} or \code{splitbiopax_from_dt} functions.

@@ -4,12 +4,10 @@
 \alias{assemble_biopax_conversion_chuncks}
 \title{Assemble Files from BioPAX Conversion Process}
 \usage{
-assemble_biopax_conversion_chuncks(folder, bindex)
+assemble_biopax_conversion_chuncks(bindex, wkdir = NULL, output_dir = NULL)
 }
 \arguments{
-\item{folder}{Folder with all files.}
-
-\item{orig_biopax}{Number of the source BioPAX object: \cr
+\item{bindex}{Number of the source BioPAX object: \cr
 1-"BioCarta"\cr
 2-"KEGG"\cr
 3-"NCI-Nature"\cr
@@ -18,6 +16,10 @@ assemble_biopax_conversion_chuncks(folder, bindex)
 6-"Science Signaling"\cr
 7-"Reactome"\cr
 8-"RMC".}
+
+\item{wkdir}{Folder with all files.}
+
+\item{output_dir}{Where to deposit results.}
 }
 \description{
 Assembles all files from BioPAX flattening and re-conversion back to BioPAX, 
