@@ -68,7 +68,7 @@ MAIN_combine_clean_biopax_unifyids<-
         write.table(filter(pw_df
                            ,biopax.Pathway.ID %in% bp_dupl_ids)
                     ,paste0(Sys.Date()
-                            ,"_duplicated_ids.xlsx")
+                            ,"_duplicated_ids.txt")
                     ,quote = FALSE
                     ,sep = "\t"
                     ,row.names = FALSE

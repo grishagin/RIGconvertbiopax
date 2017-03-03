@@ -47,6 +47,14 @@ internal_MAIN_step3_combine_write_biopax<-
         
         
         ################# rdata files
+        rdata_files<-
+            all_files %>% 
+            .[grepl("biopax_object_workspace"
+                    ,.)] 
+        invisible(sapply(rdata_files
+                         ,load
+                         ,envir = environment()))
+        
         #present sources
         present_biopax_logi<-
             biopax_obj_names %in% ls(envir = environment())
@@ -55,14 +63,6 @@ internal_MAIN_step3_combine_write_biopax<-
             biopax_source_names[present_biopax_logi]
         biopax_obj_names<-
             biopax_obj_names[present_biopax_logi]
-            
-        rdata_files<-
-            all_files %>% 
-            .[grepl("biopax_object_workspace"
-                    ,.)] 
-        invisible(sapply(rdata_files
-                         ,load
-                         ,envir = environment()))
         
         #prepare biopax objects' list
         biopax_obj_list<-
