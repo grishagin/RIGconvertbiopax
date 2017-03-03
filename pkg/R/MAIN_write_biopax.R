@@ -118,8 +118,8 @@ MAIN_write_biopax<-
             
             smallfiles<-
                 list.files(path = "./individual_pathways"
-                           ,pattern="\\.owl$") %>% 
-                .[!. %in% onebigfilename]
+                           ,pattern="\\.owl$"
+                           ,full.names = TRUE)
             try(make_targz(input_names = smallfiles
                            ,output_name = smalltarname))
             
