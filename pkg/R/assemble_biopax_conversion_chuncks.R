@@ -146,21 +146,13 @@ assemble_biopax_conversion_chuncks<-
         
         
         ################# write to files
-        write.table(comparison_df
-                    ,file.path(output_dir
-                               ,comparison_outfile)
-                    ,quote = FALSE
-                    ,sep = "\t"
-                    ,row.names = FALSE
-                    ,col.names = TRUE)
+        writeTableUseBytes(dFrame = comparison_df
+                           ,fileName = file.path(output_dir
+                                                 ,comparison_outfile))
         
-        write.table(interaction_df
-                    ,file.path(output_dir
-                               ,interaction_outfile)
-                    ,quote = FALSE
-                    ,sep = "\t"
-                    ,row.names = FALSE
-                    ,col.names = TRUE)
+        writeTableUseBytes(dFrame = interaction_df
+                           ,fileName = file.path(output_dir
+                                                 ,interaction_outfile))
         #gather all appropriate variables
         all_vars<-
             ls(envir = environment())
