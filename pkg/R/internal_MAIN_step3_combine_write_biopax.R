@@ -103,8 +103,11 @@ internal_MAIN_step3_combine_write_biopax<-
         rm(list=ls()[!ls() %in% "combined_biopax"]
            ,envir = environment())
         
-        save.image(paste0(Sys.Date()
-                          ,"_combined_biopax.RData"))
+        save(list = ls()
+             ,file = 
+                 paste0(Sys.Date()
+                        ,"_combined_biopax.RData")
+             ,envir = environment())
         
         #write biopax to file
         onebigfilename<-
