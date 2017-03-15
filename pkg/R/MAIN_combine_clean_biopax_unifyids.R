@@ -125,6 +125,7 @@ MAIN_combine_clean_biopax_unifyids<-
             }) %>% 
             do.call(rbind.data.frame
                     ,.) %>%
+            internal_fix_NOTFOUND %>% 
             #re-label the ids of a joint biopax table
             unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
                              ,exclude_class = "Pathway") %>% 
