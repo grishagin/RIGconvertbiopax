@@ -3,6 +3,9 @@ internal_fix_NOTFOUND<-
         if(! "NOTFOUND" %in% biopax_dt$class){
             return(biopax_dt)
         } 
+        biopax_dt<-
+            as.data.table(biopax_dt)
+        
         notfound_ids<-
             biopax_dt[class %in% c("NOTFOUND"
                                    ,"NOTFOUNDReference")]$id
