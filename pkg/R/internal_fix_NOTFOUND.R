@@ -3,7 +3,14 @@ internal_fix_NOTFOUND<-
         if(! "NOTFOUND" %in% biopax_dt$class){
             return(biopax_dt)
         } 
-        message("internal_fix_NOTFOUND: Found 'NOTFOUND' class items, trying to fix known ones...")
+        notfound_ids<-
+            biopax_dt[class %in% c("NOTFOUND"
+                                   ,"NOTFOUNDReference")]$id
+        
+        message("internal_fix_NOTFOUND: Found 'NOTFOUND' class items with ids "
+                ,paste(notfound_ids
+                       ,collapse=", ")
+                ,"\nTrying to fix known ones...")
         
         ########## fix NOTFOUND1 -- missing protein name in KEGG
         biopax_dt$class[biopax_dt$id=="NOTFOUND1"]<-
@@ -12,7 +19,7 @@ internal_fix_NOTFOUND<-
             "ProteinReference"
         
         new_entries<-
-            data.frame(class="Protein"
+            data.table(class="Protein"
                        ,id="NOTFOUND1"
                        ,property="displayName"
                        ,property_attr="rdf:resource"
