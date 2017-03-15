@@ -15,15 +15,15 @@ internal_fix_NOTFOUND<-
                        ,collapse=", ")
                 ,"\nTrying to fix known ones...")
         
-        ########## fix NOTFOUND1 -- missing protein name in KEGG
-        biopax_dt$class[biopax_dt$id=="NOTFOUND1"]<-
+        ########## fix keNOTFOUND1 -- missing protein name in KEGG
+        biopax_dt$class[biopax_dt$id=="keNOTFOUND1"]<-
             "Protein"
-        biopax_dt$class[biopax_dt$id=="NOTFOUNDReference1"]<-
+        biopax_dt$class[biopax_dt$id=="keNOTFOUNDReference1"]<-
             "ProteinReference"
         
         new_entries<-
             data.table(class="Protein"
-                       ,id="NOTFOUND1"
+                       ,id="keNOTFOUND1"
                        ,property="displayName"
                        ,property_attr="rdf:resource"
                        ,property_attr_value="http://www.w3.org/2001/XMLSchema#string"
