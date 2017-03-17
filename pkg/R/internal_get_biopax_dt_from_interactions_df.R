@@ -66,10 +66,10 @@ internal_get_biopax_dt_from_interactions_df<-
                     lapply(FUN=function(rindex){
                         result<-
                             internal_string_to_df(string=column[rindex]
-                                         ,el_id=el_ids[rindex]
-                                         #property vect is required to discern 
-                                         #xref from entityref-xref combo
-                                         ,prop_vect=prop_vect
+                                                  ,el_id=el_ids[rindex]
+                                                  #property vect is required to discern 
+                                                  #xref from entityref-xref combo
+                                                  ,prop_vect=prop_vect
                             )
                         return(result)
                     }) %>%
@@ -87,7 +87,8 @@ internal_get_biopax_dt_from_interactions_df<-
                             #main parent comp id
                             temp_df<-
                                 column_proc %>%
-                                filter(grepl(paste0(comp_ids[vindex]
+                                filter(grepl(paste0("^"
+                                                    ,comp_ids[vindex]
                                                     ,"(?![[:digit:]])")
                                              ,id
                                              ,fixed=FALSE
@@ -95,9 +96,9 @@ internal_get_biopax_dt_from_interactions_df<-
                             if(nrow(temp_df)>0){
                                 result<-
                                     internal_make_aux_df_for_dTable(result_dF=temp_df
-                                                           ,parent_id=comp_ids[vindex]
-                                                           ,parent_class=comp_classes[vindex]
-                                                           ,prop_vect=prop_vect
+                                                                    ,parent_id=comp_ids[vindex]
+                                                                    ,parent_class=comp_classes[vindex]
+                                                                    ,prop_vect=prop_vect
                                     )
                             } else {
                                 result<-NULL

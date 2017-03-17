@@ -25,7 +25,7 @@ internal_fix_NOTFOUND<-
             data.table(class="Protein"
                        ,id="keNOTFOUND1"
                        ,property="displayName"
-                       ,property_attr="rdf:resource"
+                       ,property_attr="rdf:datatype"
                        ,property_attr_value="http://www.w3.org/2001/XMLSchema#string"
                        ,property_value="MHC class I polypeptide-related sequence A")
         
