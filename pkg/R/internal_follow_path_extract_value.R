@@ -144,6 +144,7 @@ internal_follow_path_extract_value<-
             paste(collapse=sep) 
         
         if(exists("complex_name"
+                  ,where=environment()
                   ,envir=environment()) & 
            !is.na(to_return) & 
            !is.null(to_return)){
