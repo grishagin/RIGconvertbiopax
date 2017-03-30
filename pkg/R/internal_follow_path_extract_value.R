@@ -11,22 +11,29 @@ internal_follow_path_extract_value<-
         subdf<-
             dFrame[dFrame$id==pid,]
         
-        #in case it is the end of the path vector, convert to string with name and class
-        if(length(path_vector)==1){
-            to_return<-
-                internal_extract_last_path_element(path_vector=path_vector
-                                                   ,subdf=subdf
-                )
-            #from if-clause return value vector
-            return(to_return)
-        } 
-        
         #get a vector of referenced ids
         pav_vector<-
             subdf %>%
             .[.$property==path_vector[1],] %>%
             .$property_attr_value %>%
             striphash
+        
+        #perform a check for a complex with a name, but no components
+        if(length(pav_vector)<1 &
+           path_vector[1]=="component"){
+            #in that case, move to the next path property (i.e. name or xref)
+            path_vector<-
+                path_vector[-1]
+        }
+           
+        #in case it is the end of the path vector, convert to string with name and class
+        if(length(path_vector)==1){
+            to_return<-
+                internal_extract_last_path_element(path_vector=path_vector
+                                                   ,subdf=subdf)
+            #from if-clause return value vector
+            return(to_return)
+        } 
         
         #deprecated
         #if the value has not been found, repeat the search with 
@@ -56,19 +63,19 @@ internal_follow_path_extract_value<-
         #if such level is "xref", then just use one pipe to 
         #not separate them apart too much
         
-        if (path_vector[1]=="xref"){
+        if(path_vector[1]=="xref"){
             sep<-
                 "|"
-        } else
-            if (path_vector[1]=="component" & 
-                cpxlvl>1){
-                sep<-
-                    paste0("|",cpxlvl,"|")
-            } else {
-                #assign each level its separator ||, |-|, etc.
-                sep<-
-                    paste0("|",rep("-",lvl-1),"|")
-            }
+        }else if(path_vector[1]=="component" & 
+                 cpxlvl>1){
+            sep<-
+                paste0("|",cpxlvl,"|")
+        }else{
+            #assign each level its separator ||, |-|, etc.
+            sep<-
+                paste0("|",rep("-",lvl-1),"|")
+        }
+        
         #find present component's name or xref 
         #(depending on what the next path element is)
         #basically, if current path element is component 
@@ -106,14 +113,14 @@ internal_follow_path_extract_value<-
                            #get a df for corresponding pav
                            tempdf<-
                                dFrame[dFrame$id==pav,]
+                           
                            #check class of the returned value(s)
                            #if it's complex, it means there's another complex
                            #coming up, i.e. complex in complex, so need to repeat
                            #"component"path property
                            #and change separator
                            
-                           #old version -- if("complex" %in% tolower(tempdf$class)){
-                           if("component" %in% tolower(tempdf$property)){
+                           if("complex" %in% tolower(tempdf$class)){
                                #keep looking for components
                                path_vector_new<-
                                    path_vector
