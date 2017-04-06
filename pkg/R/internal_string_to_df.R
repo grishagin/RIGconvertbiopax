@@ -63,23 +63,23 @@ internal_string_to_df<-
                                     ,fixed=TRUE))){
                            result<-
                                internal_string_to_df(string=el
-                                            ,el_id=el_id
-                                            ,prop_vect=prop_vect
-                                            ,split="|-|")
+                                                     ,el_id=el_id
+                                                     ,prop_vect=prop_vect
+                                                     ,split="|-|")
                        } else if(length(grep("\uff60>>cplx"
                                              ,el))>0){
                            #if it's a complex, 
                            #launch complex processing function
                            result<-
-                               internal_cplx_internal_string_to_df(string=el
-                                                 ,el_id=el_id
-                                                 ,prop_vect=prop_vect)
+                               internal_cplx_string_to_df(string=el
+                                                          ,el_id=el_id
+                                                          ,prop_vect=prop_vect)
                        } else {
                            #otherwise launch the general string processing function
                            result<-
                                internal_string_to_df_inner(string=el
-                                                  ,el_id=el_id
-                                                  ,prop_vect=prop_vect)
+                                                           ,el_id=el_id
+                                                           ,prop_vect=prop_vect)
                        }
                        return(result)
                    }) %>%

@@ -1,5 +1,5 @@
-######################################## internal_cplx_internal_string_to_df ########################################
-internal_cplx_internal_string_to_df<-
+######################################## internal_cplx_string_to_df ########################################
+internal_cplx_string_to_df<-
     function(string
              ,el_id
              ,prop_vect){
@@ -108,4 +108,4 @@ internal_cplx_internal_string_to_df<-
         
         return(result_df)
     }
-######################################## internal_cplx_internal_string_to_df ########################################
+######################################## internal_cplx_string_to_df ########################################
