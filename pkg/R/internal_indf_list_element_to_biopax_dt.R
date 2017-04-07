@@ -36,13 +36,13 @@ internal_indf_list_element_to_biopax_dt<-
                     unlist %>%
                     .[-length(.)] 
                 
-                if(length(prop_vect[!prop_vect %in% internal_banned_props()])>0){
+                if(length(prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()])>0){
                     #take first letters of the defining names of a column
                     #and add them to the vector of component ids
                     #this would make a unique identifier for a given pair of columns
                     #(name and xref), which belongs to the same group
                     el_ids<-
-                        prop_vect[!prop_vect %in% internal_banned_props()] %>% 
+                        prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()] %>% 
                         substring(first = 1
                                   ,last = 1) %>%
                         paste0(collapse="") %>%

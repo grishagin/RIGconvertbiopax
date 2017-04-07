@@ -14,6 +14,11 @@ internal_string_to_df_inner_inner<-
             .[[1]] %>%
             as.data.frame
         
+        #if resultant dFrame does not have rows, return null
+        if(nrow(dFrame)<1){
+            return(NULL)
+        }
+        
         #... and take only pertaining columns of the hits
         #these numbers are hard-coded due to the pattern is known 
         #and expected to be one and only

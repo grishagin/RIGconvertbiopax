@@ -9,7 +9,7 @@ internal_cplx_string_to_df<-
         
         #build a df from complex components
         cplx_df<-
-            RIGconvertbiopax:::internal_cplx_split(string) %>%
+            internal_cplx_split(string) %>%
             split_cols_lengthen_df(colsToSplit = "comp"
                                    ,patternToSplit = split) %>%
             as.data.table %>% 
@@ -64,12 +64,12 @@ internal_cplx_string_to_df<-
         split_names_df<-
             lapply(1:nrow(cplx_df)
                    ,FUN=function(rndex){
-                       rbind.data.frame(RIGconvertbiopax:::internal_string_to_df_inner(string = cplx_df$cplx.name[rndex]
-                                                                                       ,el_id = cplx_df$cplx.id[rndex]
-                                                                                       ,prop_vect = prop_vect)
-                                        ,RIGconvertbiopax:::internal_string_to_df_inner(string = cplx_df$comp[rndex]
-                                                                                        ,el_id = cplx_df$property_attr_value[rndex]
-                                                                                        ,prop_vect = prop_vect)
+                       rbind.data.frame(internal_string_to_df_inner(string = cplx_df$cplx.name[rndex]
+                                                                    ,el_id = cplx_df$cplx.id[rndex]
+                                                                    ,prop_vect = prop_vect)
+                                        ,internal_string_to_df_inner(string = cplx_df$comp[rndex]
+                                                                     ,el_id = cplx_df$property_attr_value[rndex]
+                                                                     ,prop_vect = prop_vect)
                        )
                    }) %>%
             do.call(rbind.data.frame

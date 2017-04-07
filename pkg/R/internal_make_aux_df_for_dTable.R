@@ -11,7 +11,7 @@ internal_make_aux_df_for_dTable<-
         #by establishing connection between properties
         #and the numbers attached to each id 
         prop_vect<-
-            prop_vect[!prop_vect %in% internal_banned_props()]
+            prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()]
         
         #all ids that have not been referenced
         nonrefids<-

@@ -62,24 +62,24 @@ internal_string_to_df<-
                                     ,el
                                     ,fixed=TRUE))){
                            result<-
-                               RIGconvertbiopax:::internal_string_to_df(string=el
-                                                                        ,el_id=el_id
-                                                                        ,prop_vect=prop_vect
-                                                                        ,split="|-|")
+                               internal_string_to_df(string=el
+                                                     ,el_id=el_id
+                                                     ,prop_vect=prop_vect
+                                                     ,split="|-|")
                        } else if(length(grep("\uff60>>cplx"
                                              ,el))>0){
                            #if it's a complex, 
                            #launch complex processing function
                            result<-
-                               RIGconvertbiopax:::internal_cplx_string_to_df(string=el
-                                                                             ,el_id=el_id
-                                                                             ,prop_vect=prop_vect)
+                               internal_cplx_string_to_df(string=el
+                                                          ,el_id=el_id
+                                                          ,prop_vect=prop_vect)
                        } else {
                            #otherwise launch the general string processing function
                            result<-
-                               RIGconvertbiopax:::internal_string_to_df_inner(string=el
-                                                                              ,el_id=el_id
-                                                                              ,prop_vect=prop_vect)
+                               internal_string_to_df_inner(string=el
+                                                           ,el_id=el_id
+                                                           ,prop_vect=prop_vect)
                        }
                        return(result)
                    }) %>%

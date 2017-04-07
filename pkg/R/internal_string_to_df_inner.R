@@ -32,9 +32,9 @@ internal_string_to_df_inner<-
             lapply(function(lindex){
                 temp_df<-
                     internal_string_to_df_inner_inner(string=stringvect[[lindex]]
-                                             ,el_id=el_id
-                                             ,pav=pavs[[lindex]]
-                                             ,prop_vect=prop_vect)
+                                                      ,el_id=el_id
+                                                      ,pav=pavs[[lindex]]
+                                                      ,prop_vect=prop_vect)
                 
                 return(temp_df)
             }) %>%
