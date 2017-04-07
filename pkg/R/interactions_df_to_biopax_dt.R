@@ -66,7 +66,7 @@ interactions_df_to_biopax_dt<-
         #get dt of all components
         comp_df<-
             lapply(interactions_df_list
-                   ,internal_get_biopax_dt_from_interactions_df) %>%
+                   ,internal_indf_list_element_to_biopax_dt) %>%
             do.call(rbind.data.frame
                     ,.) 
         

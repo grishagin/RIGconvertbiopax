@@ -1,5 +1,5 @@
 ######################################## internal_get_biopax_dt_from_interactions_df ########################################
-internal_get_biopax_dt_from_interactions_df<-
+internal_indf_list_element_to_biopax_dt<-
     function(indf_list_element){
         require(stringr)
         
