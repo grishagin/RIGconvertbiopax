@@ -16,7 +16,7 @@ internal_string_to_df<-
         
         if(length(splitlist)<1){
             return(NULL)
-        } else if(length(prop_vect[!prop_vect %in% internal_banned_props()])>0){
+        } else if(length(prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()])>0){
             
             #add names by combining the supplied element name
             #add list index
@@ -62,24 +62,24 @@ internal_string_to_df<-
                                     ,el
                                     ,fixed=TRUE))){
                            result<-
-                               internal_string_to_df(string=el
-                                                     ,el_id=el_id
-                                                     ,prop_vect=prop_vect
-                                                     ,split="|-|")
+                               RIGconvertbiopax:::internal_string_to_df(string=el
+                                                                        ,el_id=el_id
+                                                                        ,prop_vect=prop_vect
+                                                                        ,split="|-|")
                        } else if(length(grep("\uff60>>cplx"
                                              ,el))>0){
                            #if it's a complex, 
                            #launch complex processing function
                            result<-
-                               internal_cplx_string_to_df(string=el
-                                                          ,el_id=el_id
-                                                          ,prop_vect=prop_vect)
+                               RIGconvertbiopax:::internal_cplx_string_to_df(string=el
+                                                                             ,el_id=el_id
+                                                                             ,prop_vect=prop_vect)
                        } else {
                            #otherwise launch the general string processing function
                            result<-
-                               internal_string_to_df_inner(string=el
-                                                           ,el_id=el_id
-                                                           ,prop_vect=prop_vect)
+                               RIGconvertbiopax:::internal_string_to_df_inner(string=el
+                                                                              ,el_id=el_id
+                                                                              ,prop_vect=prop_vect)
                        }
                        return(result)
                    }) %>%

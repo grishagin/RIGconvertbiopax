@@ -8,26 +8,32 @@ internal_string_to_df_inner_inner<-
         pattern = "([[:alpha:]]*?)=(.*?)\\{class=(.*?)\\}"
         #search for a given pattern in the string
         
-        df<-
+        dFrame<-
             string %>%
             stringr::str_match_all(pattern) %>%
             .[[1]] %>%
             as.data.frame
-        #if resultant df does not have rows, return null
-        if(nrow(df)<1){
+        #if resultant dFrame does not have rows, return null
+        if(nrow(dFrame)<1){
             return(NULL)
         }
         
         #... and take only pertaining columns of the hits
         #these numbers are hard-coded due to the pattern is known 
         #and expected to be one and only
-        df<-df[,c(2:4)]
+        dFrame<-dFrame[,c(2:4)]
         
         #again, pattern is known and that's what it is
-        colnames(df)<-
+        colnames(dFrame)<-
             c("property"
               ,"property_value"
               ,"class")
+        
+        #exclude all NA values
+        dFrame[dFrame=="NA"]<-NA
+        dFrame<-
+            dFrame %>% 
+            filter(!is.na(property_value))
         
         #if it's a string with xrefs -- add corresponding 
         #joining lines (see below) and change ids accordingly
@@ -79,13 +85,13 @@ internal_string_to_df_inner_inner<-
             aux_df<-NULL
         }
         #build element df
-        df$id<-el_id 
-        df$property_attr<-"rdf:datatype"
-        df$property_attr_value<-"http://www.w3.org/2001/XMLSchema#string"
+        dFrame$id<-el_id 
+        dFrame$property_attr<-"rdf:datatype"
+        dFrame$property_attr_value<-"http://www.w3.org/2001/XMLSchema#string"
         
         #change order
-        df<-
-            df %>%
+        dFrame<-
+            dFrame %>%
             dplyr::select(class
                           ,id
                           ,property
@@ -95,6 +101,6 @@ internal_string_to_df_inner_inner<-
             #add that auxiliary dataframe
             rbind.data.frame(aux_df)
         
-        return(df)
+        return(dFrame)
     }
 ######################################## internal_string_to_df_inner_inner ########################################
