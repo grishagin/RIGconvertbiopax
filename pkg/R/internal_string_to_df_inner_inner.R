@@ -13,10 +13,6 @@ internal_string_to_df_inner_inner<-
             stringr::str_match_all(pattern) %>%
             .[[1]] %>%
             as.data.frame
-        #if resultant dFrame does not have rows, return null
-        if(nrow(dFrame)<1){
-            return(NULL)
-        }
         
         #... and take only pertaining columns of the hits
         #these numbers are hard-coded due to the pattern is known 
@@ -34,6 +30,11 @@ internal_string_to_df_inner_inner<-
         dFrame<-
             dFrame %>% 
             filter(!is.na(property_value))
+        
+        #if resultant dFrame does not have rows, return null
+        if(nrow(dFrame)<1){
+            return(NULL)
+        }
         
         #if it's a string with xrefs -- add corresponding 
         #joining lines (see below) and change ids accordingly
