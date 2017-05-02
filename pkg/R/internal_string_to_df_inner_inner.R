@@ -71,15 +71,12 @@ internal_string_to_df_inner_inner<-
         } else if ("xref" %in% prop_vect) {
             aux_df<-
                 data.frame(class=c(paste0(el_id
-                                          ,"PLACEHOLDER")
-                )
-                ,id=c(el_id
-                )
+                                          ,"PLACEHOLDER"))
+                ,id=c(el_id)
                 ,property=c("xref")
                 ,property_attr="rdf:resource"
                 ,property_attr_value=c(paste0(pav
-                                              ,"_xr")
-                )
+                                              ,"_xr"))
                 ,property_value="")
             
             el_id<-
@@ -90,6 +87,7 @@ internal_string_to_df_inner_inner<-
             #there's no need for auxiliary df
             aux_df<-NULL
         }
+
         #build element df
         dFrame$id<-el_id 
         dFrame$property_attr<-"rdf:datatype"

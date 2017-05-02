@@ -44,7 +44,7 @@ internal_indf_list_element_to_biopax_dt<-
                     el_ids<-
                         prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()] %>% 
                         substring(first = 1
-                                  ,last = 1) %>%
+                                  ,last = 2) %>%
                         paste0(collapse="") %>%
                         paste(comp_ids
                               ,.
@@ -66,10 +66,10 @@ internal_indf_list_element_to_biopax_dt<-
                     lapply(FUN=function(rindex){
                         result<-
                             internal_string_to_df(string=column[rindex]
-                                                  ,el_id=el_ids[rindex]
-                                                  #property vect is required to discern 
-                                                  #xref from entityref-xref combo
-                                                  ,prop_vect=prop_vect
+                                                                     ,el_id=el_ids[rindex]
+                                                                     #property vect is required to discern 
+                                                                     #xref from entityref-xref combo
+                                                                     ,prop_vect=prop_vect
                             )
                         return(result)
                     }) %>%

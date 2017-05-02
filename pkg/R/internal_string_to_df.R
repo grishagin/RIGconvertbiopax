@@ -16,7 +16,7 @@ internal_string_to_df<-
         
         if(length(splitlist)<1){
             return(NULL)
-        } else if(length(prop_vect[!prop_vect %in% internal_banned_props()])>0){
+        } else if(length(prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()])>0){
             
             #add names by combining the supplied element name
             #add list index

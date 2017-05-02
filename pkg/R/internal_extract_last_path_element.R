@@ -9,8 +9,14 @@ internal_extract_last_path_element<-
         #if path vector implies search for db and id
         #search for them in a pairwise manner
         if (path_vector=="db:id"){
-            path_vector<-c("db","id")
-        } 
+            path_vector<-
+                c("db"
+                  ,"id")
+        } else if (path_vector=="positionStatus:sequencePosition"){
+            path_vector<-
+                c("positionStatus"
+                  ,"sequencePosition")
+        }
         #find the property value for each element of the path vector 
         #(if there are more than one)
         value_vector<-
