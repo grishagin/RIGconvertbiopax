@@ -82,8 +82,8 @@ interactions_df_to_biopax_dt<-
             .[complete.cases(.),] %>% 
             #replace PLACEHOLDERs 
             #with corresponding classes and properties
-            internal_fix_placeholders
-        
+            internal_fix_placeholders %>% 
+            as.data.table
         
         et<-Sys.time()
         
