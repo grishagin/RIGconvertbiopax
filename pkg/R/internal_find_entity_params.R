@@ -50,10 +50,10 @@ internal_find_entity_params<-
               ,"4feature_modificationType_name"
               ,"4feature_modificationType_xref_dbid"
               ,"5feature_featureLocation_statpos"
-              ,"5feature_sequenceIntervalBegin_statpos"
-              ,"5feature_sequenceIntervalEnd_statpos"
-              ,"6cellularLocation_name"
-              ,"6cellularLocation_xref_dbid"
+              ,"6feature_featureLocation_sequenceIntervalBegin_statpos"
+              ,"6feature_featureLocation_sequenceIntervalEnd_statpos"
+              ,"7cellularLocation_name"
+              ,"7cellularLocation_xref_dbid"
             )
         
         path_keys_vect<-
