@@ -1,0 +1,5 @@
+if(!require(roxygen2)){
+	message("Couldn't load roxygen2!")
+	Sys.sleep(1000)
+}
+try(devtools::document())
