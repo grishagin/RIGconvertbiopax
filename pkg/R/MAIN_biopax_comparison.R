@@ -122,7 +122,7 @@ MAIN_biopax_comparison<-
             }
             set.seed(123)
             pwid_to_plot<-
-                load.biopax.pathways(new_biopax)$biopax.Pathway.ID %>%
+                load_biopax_pathways(new_biopax)$biopax.Pathway.ID %>%
                 sample(pwnum)
             
             message("Plotting "

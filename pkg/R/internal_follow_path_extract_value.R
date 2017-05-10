@@ -48,7 +48,8 @@ internal_follow_path_extract_value<-
         #if such level is "xref", then just use one pipe to 
         #not separate them apart too much
         
-        if(path_vector[1]=="xref"){
+        #if(path_vector[1]=="xref"){
+        if(path_vector[1] %in% internal_banned_props()){
             sep<-
                 "|"
         }else if(path_vector[1]=="component" & 
@@ -77,11 +78,11 @@ internal_follow_path_extract_value<-
             complex_name<-
                 internal_follow_path_extract_value(dFrame=dFrame
                                                    ,pid=pid
-                                                   #basically, path_vector[2] is either a name or xref
+                                                   #basically, move onto the next property
                                                    ,path_vector=path_vector[2]
                                                    ,cpxlvl=1
                 ) %>%
-                #complex name is in vertical "brackets"
+                #complex name is in parentheses
                 paste0("(",.,")")
         }
         
@@ -126,6 +127,9 @@ internal_follow_path_extract_value<-
             unlist %>%
             paste(collapse=sep) 
         
+        #if a complex was just processed,
+        #wrap the discovered values in a special pair of parentheses
+        #they are required later, to be able to "unwrap" the complex
         if(exists("complex_name"
                   ,envir=environment()
                   ,inherits=FALSE) & 

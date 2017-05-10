@@ -121,7 +121,7 @@ internal_string_to_df_inner_inner<-
             
             el_id<-
                 paste0(pav
-                       ,"_fefrseb")
+                       ,"_fefeseb")
             
         } else if ("sequenceIntervalEnd" %in% prop_vect){
             #"feature_featureLocation_sequenceIntervalEnd"
@@ -149,7 +149,7 @@ internal_string_to_df_inner_inner<-
             
             el_id<-
                 paste0(pav
-                       ,"_fefrsee")
+                       ,"_fefesee")
             
         } else if ("featureLocation" %in% prop_vect){
             #"feature_featureLocation"

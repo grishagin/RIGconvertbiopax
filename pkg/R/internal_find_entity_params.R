@@ -45,15 +45,15 @@ internal_find_entity_params<-
         
         path_keys[[3]]<-
             c("1name"
-              ,"2entityReference_xref_dbid"
-              ,"3xref_dbid"
+              ,"2entityReference_xref_db:id"
+              ,"3xref_db:id"
               ,"4feature_modificationType_name"
-              ,"4feature_modificationType_xref_dbid"
-              ,"5feature_featureLocation_statpos"
-              ,"6feature_featureLocation_sequenceIntervalBegin_statpos"
-              ,"6feature_featureLocation_sequenceIntervalEnd_statpos"
+              ,"4feature_modificationType_xref_db:id"
+              ,"5feature_featureLocation_positionStatus:sequencePosition"
+              ,"6feature_featureLocation_sequenceIntervalBegin_positionStatus:sequencePosition"
+              ,"6feature_featureLocation_sequenceIntervalEnd_positionStatus:sequencePosition"
               ,"7cellularLocation_name"
-              ,"7cellularLocation_xref_dbid"
+              ,"7cellularLocation_xref_db:id"
             )
         
         path_keys_vect<-
@@ -84,52 +84,24 @@ internal_find_entity_params<-
                 .[!grepl("participant"
                          ,.)] %>% 
                 c("evidence_evidenceCode_name"
-                  ,"evidence_evidenceCode_xref_dbid"
+                  ,"evidence_evidenceCode_xref_db:id"
                   ,.) 
         }else if(entity_type=="pathwayComponent"){
             #for high-level control component  
             #just take the evidence
             path_keys_vect<-
                 c("evidence_evidenceCode_name"
-                  ,"evidence_evidenceCode_xref_dbid")
+                  ,"evidence_evidenceCode_xref_db:id")
         }
         ########################### prepare path keys vector
         
         ########################### actual path property elements
-        path_elements_list<-
-            list(
-                product = "product"
-                ,left = "left"
-                ,right = "right"
-                ,participant = "participant"
-                ,component = "component"
-                ,name = name_name
-                ,entityReference = "entityReference"
-                ,xref = c("xref"
-                          ,"db:id")
-                ,featureLocation = c("featureLocation"
-                                     ,"positionStatus:sequencePosition")
-                ,sequenceIntervalBegin = c("featureLocation"
-                                           ,"sequenceIntervalBegin"
-                                           ,"positionStatus:sequencePosition")
-                ,sequenceIntervalEnd = c("featureLocation"
-                                         ,"sequenceIntervalEnd"
-                                         ,"positionStatus:sequencePosition")
-                ,evidence = "evidence"
-                ,evidenceCode = "evidenceCode"
-                ,feature = "feature"
-                ,modificationType = "modificationType"
-                ,cellularLocation = "cellularLocation"
-            )
-        
         paths_list<-
             path_keys_vect %>%
-            strsplit(split="_") %>%
-            lapply(FUN=function(element){
-                path_elements_list[element] %>%
-                    unlist %>%
-                    stripNames
-            })
+            gsub("name$"
+                 ,name_name
+                 ,.) %>% 
+            strsplit(split="_") 
         names(paths_list)<-
             path_keys_vect
         

@@ -127,7 +127,7 @@ MAIN_flatten_biopax<-
         #and if not -- load biopax
         if(is.null(biopax)){
             biopax<-
-                load.biopax(source_name=source_name
+                load_biopax(source_name=source_name
                             ,source_dir=NULL)
         }
         
@@ -200,10 +200,10 @@ MAIN_flatten_biopax<-
         ########################## extract interactions from biopax
         st<-Sys.time()
         interactions_df<-
-            extractBiopaxInteractions_vect(pw_id_vect=pwid_to_convert
-                                           ,biopax=biopax
-                                           ,biopax_source=source_name
-                                           ,tag=groupnum)
+            extract_biopax_interactions_vect(pw_id_vect=pwid_to_convert
+                                             ,biopax=biopax
+                                             ,biopax_source=source_name
+                                             ,tag=groupnum)
         
         et<-Sys.time()
         msg<-

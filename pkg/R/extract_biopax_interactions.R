@@ -1,5 +1,5 @@
-######################################## extractBiopaxInteractions ########################################
-extractBiopaxInteractions<-
+######################################## extract_biopax_interactions ########################################
+extract_biopax_interactions<-
     function(pw_id
              ,biopax
              ,biopax_source){
@@ -170,7 +170,7 @@ extractBiopaxInteractions<-
                              ,noncontrol_df)
         return(result_df)
     }
-######################################## extractBiopaxInteractions ########################################
+######################################## extract_biopax_interactions ########################################
 
 #' ######################################## extractBiopaxInteractions ########################################
 #' extractBiopaxInteractions<-

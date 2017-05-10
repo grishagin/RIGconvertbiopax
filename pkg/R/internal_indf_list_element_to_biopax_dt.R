@@ -22,6 +22,7 @@ internal_indf_list_element_to_biopax_dt<-
             #take part of interactions_df (control, or otherwise)
             1:ncol(indf_list_element) %>%
             lapply(FUN=function(cndex){
+                print(cndex)
                 column<-
                     indf_list_element[[cndex]]
                 #if all members of the column are NA values
@@ -36,13 +37,13 @@ internal_indf_list_element_to_biopax_dt<-
                     unlist %>%
                     .[-length(.)] 
                 
-                if(length(prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()])>0){
+                if(length(prop_vect[!prop_vect %in% internal_banned_props()])>0){
                     #take first letters of the defining names of a column
                     #and add them to the vector of component ids
                     #this would make a unique identifier for a given pair of columns
                     #(name and xref), which belongs to the same group
                     el_ids<-
-                        prop_vect[!prop_vect %in% RIGconvertbiopax:::internal_banned_props()] %>% 
+                        prop_vect[!prop_vect %in% internal_banned_props()] %>% 
                         substring(first = 1
                                   ,last = 2) %>%
                         paste0(collapse="") %>%
@@ -66,11 +67,10 @@ internal_indf_list_element_to_biopax_dt<-
                     lapply(FUN=function(rindex){
                         result<-
                             internal_string_to_df(string=column[rindex]
-                                                                     ,el_id=el_ids[rindex]
-                                                                     #property vect is required to discern 
-                                                                     #xref from entityref-xref combo
-                                                                     ,prop_vect=prop_vect
-                            )
+                                                  ,el_id=el_ids[rindex]
+                                                  #property vect is required to discern 
+                                                  #xref from entityref-xref combo
+                                                  ,prop_vect=prop_vect)
                         return(result)
                     }) %>%
                     do.call(rbind.data.frame

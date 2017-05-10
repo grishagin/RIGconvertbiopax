@@ -1,5 +1,5 @@
-######################################## extractBiopaxInteractions_vect ########################################
-extractBiopaxInteractions_vect<-
+######################################## extract_biopax_interactions_vect ########################################
+extract_biopax_interactions_vect<-
     function(pw_id_vect="all"
              ,biopax
              ,biopax_source
@@ -44,7 +44,7 @@ extractBiopaxInteractions_vect<-
         #extract interactions for them
         result_df_list<-
             lapply(pw_id_vect
-                   ,extractBiopaxInteractions
+                   ,extract_biopax_interactions
                    ,biopax=biopax
                    ,biopax_source=biopax_source)
         result_df<-
@@ -72,4 +72,4 @@ extractBiopaxInteractions_vect<-
         
         return(result_df)
     }
-######################################## extractBiopaxInteractions_vect ########################################
+######################################## extract_biopax_interactions_vect ########################################
