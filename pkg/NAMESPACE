@@ -1,5 +1,4 @@
 export("assemble_biopax_conversion_chuncks"
-		,"biopax_dt_id_cleanup"
 		,"check_biopax"
 		,"extract_biopax_interactions"
 		,"extract_biopax_interactions_vect"

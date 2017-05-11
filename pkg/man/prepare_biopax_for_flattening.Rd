@@ -11,7 +11,7 @@ prepare_biopax_for_flattening(biopax)
 }
 \description{
 Prepares a BioPAX object for correct flattening:  \cr
-1. Removes hashes from property_attr_value column;  \cr
+1. Applies \code{clean_biopax} function;  \cr
 2. For instances of class \code{Complex}, replaces \code{memberPhysicalEntity} with \code{component};  \cr
 3. Removes all \code{memberPhysicalEntity}-related instances by replacing 
 references to instances with \code{memberPhysicalEntity} property with references to the instances they reference.
