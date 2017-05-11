@@ -9,6 +9,7 @@ prepare_biopax_for_flattening<-
         #' 2. For instances of class \code{Complex}, replaces \code{memberPhysicalEntity} with \code{component};  \cr
         #' 3. Removes all \code{memberPhysicalEntity}-related instances by replacing 
         #' references to instances with \code{memberPhysicalEntity} property with references to the instances they reference.
+        #' 4. Removes deadend references.
         #' @param biopax BioPAX object.
         #' 
         #' @author 
@@ -22,15 +23,14 @@ prepare_biopax_for_flattening<-
         #replace memberPhysicalEntity with complex component
         #for each such case, replace memberPhysicalEntity with component -- 
         #because that's what it essentially is
-        mem_phys_ent_complex_logi<-
-            biopax$dt$property=="memberPhysicalEntity" &
-            biopax$dt$class=="Complex"
-        biopax$dt$property[mem_phys_ent_complex_logi]<-
+        biopax$dt[property=="memberPhysicalEntity" &
+                      class=="Complex"]$property<-
             "component"
         
         biopax<-
             biopax %>% 
-            internal_remove_biopax_property(property_to_remove="memberPhysicalEntity")
+            internal_remove_biopax_property(property_to_remove="memberPhysicalEntity") %>% 
+            remove_deadend_refs
         
         return(biopax)
     }
