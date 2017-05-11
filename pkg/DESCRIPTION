@@ -1,7 +1,7 @@
 Package: RIGconvertbiopax
 Type: Package
 Title: Convert BioPAX into Flat File and Back
-Version: 3.0
+Version: 3.1
 Depends:
     tcltk,
     plyr,
@@ -12,7 +12,7 @@ Depends:
 	RIGbiopax
 Imports:
     data.table
-Date: 2017-05-02
+Date: 2017-05-11
 Author: Ivan Grishagin
 Maintainer: Ivan Grishagin <grishagin@gmail.com>
 Description: A set of functions to extract interactions from BioPAX *.owl files and write those flat files back into BioPAX format.

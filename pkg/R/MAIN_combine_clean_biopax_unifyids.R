@@ -79,7 +79,7 @@ MAIN_combine_clean_biopax_unifyids<-
             pw_df %>%
             filter(status=="included")
         
-        final_biopax_dt<-
+        combined_biopax<-
             1:length(new_biopax_list) %>% 
             #first, unify ids for each biopax dt
             #and label them with first two letters of biopax source
@@ -130,57 +130,9 @@ MAIN_combine_clean_biopax_unifyids<-
             unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
                              ,exclude_class = "Pathway") %>% 
             unique %>% 
-            as.data.table
-        
-        dict<-
-            data.table(from=c("\u201A\u00e0\u00f6\u221a\u00a9\u00ac\u00a8\u00ac\u00b5"
-                              ,"\u00c3\u008e\u00c2\u00b2"
-                              ,"\u00c3\u009f","&gt;","&apos;","&"
-                              ,"\u00e2\u0080\u009c"
-                              ,"\u00e2\u0080?"
-                              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0080\u009c"
-                              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2"
-                              ,"\u00e2\u0093"
-                              ,"\u00e2\u0094"
-                              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00e2\u0084\u00a2"
-                              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2\u00b2"
-                              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c5\u0093"
-                              ,"\u00c3\u00a2\u00e2\u0082\u00ac\u00c2?"
-                              ,"\u0093"
-                              ,"\u0094")
-                       ,to=c("\u03b5"
-                             ,"\u03b2"
-                             ,"\u03b2",">","'","and"
-                             ,""
-                             ,""
-                             ,"-"
-                             ,"-"
-                             ,"-"
-                             ,"-"
-                             ,"'"
-                             ,"'"
-                             ,"\""
-                             ,"\""
-                             ,"\""
-                             ,"\""))
-        
-        
-        
-        #clean biopax object from utf tags
-        #find affected rows
-        badsymbol_rows<-
-            final_biopax_dt[property_value!=""]$property_value %>% 
-            grepl("[^[:graph:][:space:]]"
-                  ,.) 
-        
-        final_biopax_dt[property_value!=""][badsymbol_rows]$property_value<-
-            final_biopax_dt[property_value!=""][badsymbol_rows]$property_value %>%
-            mgsub(pattern = dict$from
-                  ,replacement = dict$to
-                  ,text.var = .)
-        
-        combined_biopax<-
-            biopax_from_dt(final_biopax_dt)
+            as.data.table %>% 
+            #make biopax
+            biopax_from_dt
         
         return(combined_biopax)
         

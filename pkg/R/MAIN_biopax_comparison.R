@@ -55,8 +55,7 @@ MAIN_biopax_comparison<-
         #otherwise there will be some inconsistencies
         orig_biopax<-
             orig_biopax %>% 
-            clean_biopax_property_value
-        
+            clean_biopax
         
         st<-Sys.time()
         

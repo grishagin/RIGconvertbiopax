@@ -135,7 +135,6 @@ MAIN_flatten_biopax<-
         ########################## clean and prepare biopax
         biopax<-
             biopax %>% 
-            clean_biopax_property_value %>% 
             #prepare biopax for flattening
             prepare_biopax_for_flattening
         
