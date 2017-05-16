@@ -126,14 +126,19 @@ MAIN_combine_clean_biopax_unifyids<-
             do.call(rbind.data.frame
                     ,.) %>%
             internal_fix_NOTFOUND %>% 
-            #re-label the ids of a joint biopax table
-            unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
-                             ,exclude_class = "Pathway") %>% 
             unique %>% 
             as.data.table %>% 
             #make biopax
-            biopax_from_dt
-        
+            biopax_from_dt %>% 
+            
+            #remove duplicate biopax components
+            remove_duplicate_biopax_components %>% 
+            #annotate with gene ids
+            add_symbols_entrezids2biopax %>% 
+            #unify (re-label) biopax ids
+            unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
+                             ,exclude_class = "Pathway")
+      
         return(combined_biopax)
         
     }

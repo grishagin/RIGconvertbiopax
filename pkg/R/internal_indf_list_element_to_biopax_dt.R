@@ -22,7 +22,6 @@ internal_indf_list_element_to_biopax_dt<-
             #take part of interactions_df (control, or otherwise)
             1:ncol(indf_list_element) %>%
             lapply(FUN=function(cndex){
-                print(cndex)
                 column<-
                     indf_list_element[[cndex]]
                 #if all members of the column are NA values
