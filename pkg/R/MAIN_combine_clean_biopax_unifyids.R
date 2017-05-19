@@ -84,11 +84,12 @@ MAIN_combine_clean_biopax_unifyids<-
             #first, unify ids for each biopax dt
             #and label them with first two letters of biopax source
             lapply(FUN=function(lindex){
-                #get ids for a given source
+                #get pathway ids for a given source
                 temp_pw_df<-
                     pw_df %>%
                     filter(Source %in% names(new_biopax_list)[lindex])
                 
+                #any ids missing? Should not be, so it's a precaution.
                 missing_ids<-
                     temp_pw_df$biopax.Pathway.ID[!temp_pw_df$biopax.Pathway.ID %in% new_biopax_list[[lindex]]$dt$id]
                 
@@ -102,42 +103,52 @@ MAIN_combine_clean_biopax_unifyids<-
                     
                 }
                 
-                #for those ids, replace biopax ids with inxight pathway ids
+                #for those ids, replace biopax pathway ids with inxight pathway ids
+                old_pw_ids<-
+                    temp_pw_df$biopax.Pathway.ID
+                new_pw_ids<-
+                    temp_pw_df$toxdb.Pathway.ID
+                
+                
                 temp_unif_df<-
-                    new_biopax_list[[lindex]]$dt %>%
-                    mutate(id = 
-                               mapvalues(id
-                                         ,from = temp_pw_df$biopax.Pathway.ID
-                                         ,to = temp_pw_df$toxdb.Pathway.ID)
-                           ,property_attr_value = 
-                               mapvalues(property_attr_value
-                                         ,from = temp_pw_df$biopax.Pathway.ID[temp_pw_df$biopax.Pathway.ID %in% property_attr_value]
-                                         ,to = temp_pw_df$toxdb.Pathway.ID[temp_pw_df$biopax.Pathway.ID %in% property_attr_value])) 
+                    new_biopax_list[[lindex]]$dt
+                
+                temp_unif_df$id<-
+                    temp_unif_df$id %>%
+                    mapvalues(from = old_pw_ids
+                              ,to = new_pw_ids)
+                
+                temp_unif_df$property_attr_value<-
+                    temp_unif_df$property_attr_value %>%
+                    mapvalues(from = old_pw_ids
+                              ,to = new_pw_ids) 
+        
                 temp_unif_df<-
                     temp_unif_df %>%
                     unify_biopax_ids(idtag=substr(tolower(names(new_biopax_list)[lindex])
                                                   ,start = 1
                                                   ,stop = 2)
                                      ,exclude_id_pattern=exclude_id_pattern
-                                     ,exclude_class = "Pathway"
-                    )
+                                     ,exclude_class = "Pathway")
                 return(temp_unif_df)
             }) %>% 
-            do.call(rbind.data.frame
-                    ,.) %>%
-            internal_fix_NOTFOUND %>% 
+            do.call(rbind
+                    ,.) %>% 
             unique %>% 
-            as.data.table %>% 
+            internal_fix_NOTFOUND %>% 
             #make biopax
-            biopax_from_dt %>% 
-            
-            #remove duplicate biopax components
-            remove_duplicate_biopax_components %>% 
-            #annotate with gene ids
-            add_symbols_entrezids2biopax %>% 
-            #unify (re-label) biopax ids
-            unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
-                             ,exclude_class = "Pathway")
+            biopax_from_dt 
+        
+        #these steps need to be debugged as of v3-2
+        # %>% 
+        #     #remove duplicate biopax components
+        #     remove_duplicate_biopax_components 
+        # 
+        #     #annotate with gene ids
+        #     add_symbols_entrezids2biopax %>% 
+        #     #unify (re-label) biopax ids
+        #     unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
+        #                      ,exclude_class = "Pathway")
       
         return(combined_biopax)
         

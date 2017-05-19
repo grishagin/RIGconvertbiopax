@@ -72,16 +72,15 @@ internal_follow_path_extract_value<-
         if(path_vector[1]=="component" &
            "component" %in% dFrame$property &
            #only for NOT top-level component
-           #that one has its name in the corresponding Name column
+           #that one has its name in the preceding *blah-blah-_name* column
            #I know, it's confusing
            cpxlvl>1){
             complex_name<-
                 internal_follow_path_extract_value(dFrame=dFrame
                                                    ,pid=pid
                                                    #basically, move onto the next property
-                                                   ,path_vector=path_vector[2]
-                                                   ,cpxlvl=1
-                ) %>%
+                                                   ,path_vector=path_vector[-1]
+                                                   ,cpxlvl=1) %>%
                 #complex name is in parentheses
                 paste0("(",.,")")
         }

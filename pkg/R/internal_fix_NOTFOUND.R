@@ -16,9 +16,9 @@ internal_fix_NOTFOUND<-
                 ,"\nTrying to fix known ones...")
         
         ########## fix keNOTFOUND1 -- missing protein name in KEGG
-        biopax_dt$class[biopax_dt$id=="keNOTFOUND1"]<-
+        biopax_dt[id=="keNOTFOUND1"]$class<-
             "Protein"
-        biopax_dt$class[biopax_dt$id=="keNOTFOUNDReference1"]<-
+        biopax_dt[id=="keNOTFOUNDReference1"]$class<-
             "ProteinReference"
         
         new_entries<-
@@ -28,10 +28,9 @@ internal_fix_NOTFOUND<-
                        ,property_attr="rdf:datatype"
                        ,property_attr_value="http://www.w3.org/2001/XMLSchema#string"
                        ,property_value="MHC class I polypeptide-related sequence A")
-        
         biopax_dt<-
-            rbind.data.frame(biopax_dt
-                             ,new_entries)
+            biopax_dt %>% 
+            rbind(new_entries)
         
         ########## check if there are more
         if("NOTFOUND" %in% biopax_dt$class){
