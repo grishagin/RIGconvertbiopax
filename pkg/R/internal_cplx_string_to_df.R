@@ -14,11 +14,26 @@ internal_cplx_string_to_df<-
                                    ,patternToSplit = split) %>%
             as.data.table %>% 
             #remove all components that are NA
-            .[!is.na(comp)] %>% 
-            #remove all components that refer to complex ids that are not in id column
-            .[!(grepl("cplx\\."
-                      ,comp) &
-                    !comp %in% cplx.id)]
+            .[!is.na(comp)] 
+        
+        #auxiliary complex dataframe
+        cplx_df_aux<-NULL
+        
+        #remove all components that refer to complex ids that are not in id column
+        #and do not refere to anything of substance
+        #do this iteratively, as new cases like this will pop up
+        while(!identical(cplx_df_aux,cplx_df)){
+            cplx_df_aux<-
+                cplx_df
+            
+            cplx_df<-
+                cplx_df %>% 
+                .[!(grepl("cplx\\."
+                          ,comp) &
+                        !comp %in% cplx.id)]
+        }
+        
+        
         if(nrow(cplx_df)==0){
             return(NULL)
         }
