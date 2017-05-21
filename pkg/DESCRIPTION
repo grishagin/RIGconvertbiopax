@@ -1,12 +1,13 @@
 Package: RIGconvertbiopax
 Type: Package
 Title: Convert BioPAX into Flat File and Back
-Version: 3.3.1
+Version: 3.3.3
 Depends:
     tcltk,
     plyr,
     dplyr,
 	data.table,
+	mygene,
     rBiopaxParser,
     RIGessentials,
 	RIGbiopax

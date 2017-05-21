@@ -137,18 +137,17 @@ MAIN_combine_clean_biopax_unifyids<-
             unique %>% 
             internal_fix_NOTFOUND %>% 
             #make biopax
-            biopax_from_dt 
-        
-        #these steps need to be debugged as of v3-2
-        # %>% 
-        #     #remove duplicate biopax components
-        #     remove_duplicate_biopax_components 
-        # 
-        #     #annotate with gene ids
-        #     add_symbols_entrezids2biopax %>% 
-        #     #unify (re-label) biopax ids
-        #     unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
-        #                      ,exclude_class = "Pathway")
+            biopax_from_dt %>%
+            
+            #remove duplicate biopax components
+            remove_duplicate_biopax_components
+
+            #annotate with gene ids
+            add_symbols_entrezids2biopax %>%
+                
+            #unify (re-label) biopax ids
+            unify_biopax_ids(exclude_id_pattern=exclude_id_pattern
+                             ,exclude_class = "Pathway")
       
         return(combined_biopax)
         
