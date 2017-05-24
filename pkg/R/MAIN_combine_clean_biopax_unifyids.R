@@ -135,12 +135,16 @@ MAIN_combine_clean_biopax_unifyids<-
             do.call(rbind
                     ,.) %>% 
             unique %>% 
+            #some components have notfound in their class -> fix those
             internal_fix_NOTFOUND %>% 
             #make biopax
             biopax_from_dt %>%
             
+            #remove deadend references
+            remove_deadend_refs %>% 
+            
             #remove duplicate biopax components
-            remove_duplicate_biopax_components
+            remove_duplicate_biopax_components %>% 
 
             #annotate with gene ids
             add_symbols_entrezids2biopax %>%
