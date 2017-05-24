@@ -2,21 +2,21 @@ internal_MAIN_step3_combine_write_biopax<-
     function(file_dir=NULL
              ,output_dir=NULL){
         
+        #prepare directories if not supplied
         if(is.null(file_dir)){
             file_dir<-
                 getwd()
         }
         
-        prepareSession(file_dir)
-        
         if(is.null(output_dir)){
             output_dir<-
-                "./combined_biopax"
+                file.path(file_dir
+                          ,"combined_biopax")
             dir.create(path = output_dir
                        ,showWarnings = FALSE)
         }
-
-        setwd(output_dir)
+        
+        prepareSession(output_dir)
         
         all_files<-
             list.files(path = file_dir
