@@ -38,8 +38,7 @@ internal_MAIN_step4_plot_pathways<-
         }
         
         pw_ids<-
-            listPathways(combined_biopax
-                         ,) %>% 
+            listPathways(combined_biopax) %>% 
             as.data.table %>% 
             .[grepl(pw_id_pattern
                     ,id)]$id
