@@ -40,5 +40,7 @@ internal_fix_NOTFOUND<-
             warning(msg)
             
         } 
+        
+        message("internal_fix_NOTFOUND: Known 'NOTFOUND' class items have been fixed.")
         return(biopax_dt)
     }
