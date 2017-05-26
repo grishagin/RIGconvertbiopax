@@ -1,7 +1,7 @@
 Package: RIGconvertbiopax
 Type: Package
 Title: Convert BioPAX into Flat File and Back
-Version: 3.6
+Version: 3.6.1
 Depends:
     tcltk,
     plyr,

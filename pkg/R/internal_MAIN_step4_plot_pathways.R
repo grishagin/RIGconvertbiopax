@@ -32,7 +32,7 @@ internal_MAIN_step4_plot_pathways<-
                        ,envir = environment()))
         
         ################# form a list pathways
-        if(!exists(combined_biopax)){
+        if(!"combined_biopax" %in% ls(envir = environment())){
             stop("internal_MAIN_step4_all_biopax_assemble:
                  can't seem to find a 'combined_biopax' object! Aborting...")
         }
