@@ -41,7 +41,8 @@ internal_MAIN_step4_plot_pathways<-
             listPathways(combined_biopax) %>% 
             as.data.table %>% 
             .[grepl(pw_id_pattern
-                    ,id)]$id
+                    ,id)] %>% 
+            .$id
         
         ################# plot those pathways
         RIGplotbiopax:::plot_pathways(biopax = combined_biopax
