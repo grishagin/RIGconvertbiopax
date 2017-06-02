@@ -31,7 +31,7 @@ internal_MAIN_step4_plot_pathways<-
         invisible(load(rdata_file
                        ,envir = environment()))
         
-        ################# form a list pathways
+        ################# form a list of pathways
         if(!"combined_biopax" %in% ls(envir = environment())){
             stop("internal_MAIN_step4_all_biopax_assemble:
                  can't seem to find a 'combined_biopax' object! Aborting...")
